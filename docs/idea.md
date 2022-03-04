@@ -4,8 +4,11 @@ App Name: matcher
 
 # Team Overview
 Sawyer Ji - sawjji
+
 Ajan Prabakar - TheSociologist
+
 Kays Laouar - Kays-L
+
 Sugun Yadla - sugun-yadla
 
 # Innovative Idea
