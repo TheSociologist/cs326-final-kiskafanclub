@@ -12,6 +12,80 @@
     <div include-html="header.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    Dashboard
+    <div class="container" id="dashboard-container">
+      <div class="row">
+        <div class="col-3">
+          <div class="card sidebar-card">
+            <div class="card-body">
+              <h5 class="card-title">Suggested Schools</h5>
+              <p class="card-text">
+                These are a list of schools you might be interested in.
+              </p>
+            </div>
+          </div>
+          <div class="card sidebar-card">
+            <div class="card-body">
+              <h5 class="card-title">Suggested Tutors</h5>
+              <p class="card-text">
+                These are a list of tutors you might be interested in.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6" id="feed">
+          <div class="card post-card">
+            <div class="card-body">
+              <a href="/post.html">
+                <h5 class="card-title">
+                  Does anyone know when the deadline to apply to UMass is?
+                </h5>
+              </a>
+              <p class="card-text">
+                Kinda worried about missing it. Thanks!
+              </p>
+              <button type="button" class="btn btn-outline-primary">
+                <img
+                  src="https://cdn4.iconfinder.com/data/icons/neutro-award/32/upvote-512.png"
+                  class="upvote-icon"
+                />
+                Upvote
+              </button>
+              <a href="#" class="btn btn-primary">Answer this question</a>
+            </div>
+          </div>
+          <div class="card post-card">
+            
+            <div class="card-body">
+              <a href="/post.html">
+                <h5 class="card-title">
+                 How are the dorms in Northeast? 
+                </h5>
+              </a>
+              <p class="card-text">
+                How old are they? Are they close to the gym?
+              </p>
+              <button type="button" class="btn btn-outline-primary">
+                <img
+                  src="https://cdn4.iconfinder.com/data/icons/neutro-award/32/upvote-512.png"
+                  class="upvote-icon"
+                />
+                Upvote
+              </button>
+              <a href="#" class="btn btn-primary">Answer this question</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card sidebar-card">
+            <div class="card-body">
+              <h5 class="card-title">Ongoing zoom meetings</h5>
+              <p class="card-text">
+                These are a list of live sessions you might be interested in.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
