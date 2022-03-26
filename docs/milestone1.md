@@ -22,3 +22,5 @@ Can list popular courses
 # Wireframes
 Homepage:
 ![homepage wireframe](./homepage wireframe.jpg)
+Search results:
+![search results](./search results wireframe)
