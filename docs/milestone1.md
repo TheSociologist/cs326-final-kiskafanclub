@@ -20,3 +20,5 @@ Can share images and documents like syllabi, campus photos, etc.
 Can list popular courses
 
 # Wireframes
+Homepage:
+![homepage wireframe](./homepage wireframe.jpg)
