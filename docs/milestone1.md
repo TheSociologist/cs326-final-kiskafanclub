@@ -88,7 +88,7 @@ The above image is a screenshot of the page where you can edit your profile info
 
 ## Profile (Sawyer)
 ### Wireframe
-![Profile Wireframe](https://drive.google.com/uc?id=12nLYCVMbUpSijU13yFv4z0NXbQJOxMTO)
+![Profile Wireframe](https://drive.google.com/uc?id=1R0W8EitBXRD2wiVlWrk3RM3C6PUNfqzA)
 ### HTML Page
 ![Profile HTML](https://drive.google.com/uc?id=175AlAckd_nHVqH-DgczwXi5Xgaev9dmq)
 ### Description
