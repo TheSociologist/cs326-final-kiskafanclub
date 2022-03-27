@@ -32,7 +32,7 @@ This program is a service for high school students who want to learn more about 
 ## Dashboard (Ajan)
 ### Wireframe
 ### HTML Page
-![Dashboard](https://drive.google.com/file/d/1NAnpjbLSlse-5S3QdWNcZen0uaB8c6jX/view?usp=sharing)
+![Dashboard](https://drive.google.com/file/d/1NAnpjbLSlse-5S3QdWNcZen0uaB8c6jX)
 ### Description
 The dashboard provides users with a list of recent and trending question and answer posts from the colleges they're following. Within the desktop view, there are sidebar elements that provide quick links to recommended and ongoing content. On the left this includes a list of recommended colleges based off the user's followed colleges. We can implement a basic query to match tags and certain stats about colleges to come up with recommendations. Additionally, there are a list of recommended q&a posts from colleges the user is not following. This can be found using similar systems as before. On the right are quick links to currently live zoom sessions. We can use HTTP long polling or websockets to keep this list consistently updating or just fallback to the stated times for the meetings.
 
