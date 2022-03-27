@@ -31,7 +31,7 @@ This program is a service for high school students who want to learn more about 
 
 ## Dashboard (Ajan)
 ### Wireframe
-![Dashboard Wireframe](https://drive.google.com/uc?id=13ORH7GNKiVq-rJAlADE4t5bVPEJxTL0y)
+![Dashboard Wireframe](https://drive.google.com/uc?id=14NzhewRhNx9fGtCqOri-ZVTGQZeUllPh)
 ### HTML Page
 ![Dashboard HTML](https://drive.google.com/uc?id=1NAnpjbLSlse-5S3QdWNcZen0uaB8c6jX)
 ### Description
