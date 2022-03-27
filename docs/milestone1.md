@@ -72,7 +72,7 @@ Nice layout with login and signup buttons, menu/nav bar (shows up on all pages),
 
 ## Search results page (Kays)
 ### Wireframe
-![Search Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+![Search Wireframe](https://drive.google.com/uc?id=1-Vv0JraGRewfOL4_W7KHVuvjyWuV_3Vu)
 ### HTML Page
 ![Search HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
@@ -80,7 +80,7 @@ Displays profiles of users given keywords that were searched for. Key words may 
 
 ## Sign up page (Sugun)
 ### Wireframe
-![Sign up Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+![Sign up Wireframe](https://drive.google.com/uc?id=1Q7QJpKuG7EfCWq3kPHUNtfJEUogMqYUf)
 ### HTML Page
 ![Sign up HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
@@ -89,7 +89,7 @@ The above image is a screenshot of where you will be prompted to either login to
 
 ## Settings (Sugun)
 ### Wireframe
-![Settings Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+![Settings Wireframe](https://drive.google.com/uc?id=1qwUO5_XiYEB6pa8D2IyAgRez6b0HlsCq)
 ### HTML Page
 ![Settings HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
@@ -97,7 +97,7 @@ The above image is a screenshot of the page where you can edit your profile info
 
 ## Profile (Sawyer)
 ### Wireframe
-![Profile Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+![Profile Wireframe](https://drive.google.com/uc?id=1R0W8EitBXRD2wiVlWrk3RM3C6PUNfqzA)
 ### HTML Page
 ![Profile HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
@@ -105,7 +105,7 @@ The following page is a snapshot of a random user's profile. This page will let 
 
 ## Ongoing Meetings (Sawyer)
 ### Wireframe
-![Ongoing Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+![Ongoing Wireframe](https://drive.google.com/uc?id=1e29Vtgsde-z7LpEy7g4_wtB2h0mlF-uF)
 ### HTML Page
 ![Ongoing HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
