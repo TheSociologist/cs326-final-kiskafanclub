@@ -15,6 +15,27 @@ App where high school students seek information/advice about colleges and the co
 
 Also if volunteers set up profiles on the app or connect their linkedins, (and high school students do the same), we could use some kind of stable matching to match students with volunteers based on profile data. 
 
+# Important Components
+- High Schools
+- Colleges
+Students will say what high school and college they're a part of so the website can match them. 
+
+- Q&A Posts
+Can ask specific open questions about college or college applications. 
+
+- Likes
+Can like posts to increase their visibility and ranking.
+
+- Comments
+Can comment to respond to Q&A and other posts. 
+
+- Media (images and documents)
+Can share images and documents like syllabi, campus photos, etc.
+
+- Courses
+Can list popular courses
+
+
 # Pages
 
 ## Dashboard (Ajan)
@@ -41,16 +62,45 @@ The colleges page gives users the ability to discover and compile colleges using
 ### Description
 The menu bar is the top-most website navigation system on the platform. It includes website details including an icon and title and links to each top-level page including home, collges, and the signed in user's profile and settings (within a dropdown). There's also a searchbar on the right that can be used to look for colleges, other users, questions, and meetings.
 
-## Search results (Kays)
-### Wireframe
-![Search results](https://drive.google.com/uc?id=1-Vv0JraGRewfOL4_W7KHVuvjyWuV_3Vu)
-### HTML Page
-
-### Description
-
 ## Home page (Kays)
 ### Wireframe
-![Home Page](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+![Home Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### HTML Page
+![Home HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### Description
 
+## Search results page (Kays)
+### Wireframe
+![Search Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### HTML Page
+![Search HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### Description
+
+## Sign up page (Sugun)
+### Wireframe
+![Sign up Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### HTML Page
+![Sign up HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### Description
+
+
+## Settings (Sugun)
+### Wireframe
+![Settings Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### HTML Page
+![Settings HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### Description
+
+## Profile (Sawyer)
+### Wireframe
+![Profile Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### HTML Page
+![Profile HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### Description
+
+## Ongoing Meetings (Sawyer)
+### Wireframe
+![Ongoing Wireframe](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
+### HTML Page
+![Ongoing HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
