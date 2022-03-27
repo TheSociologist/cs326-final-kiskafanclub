@@ -59,3 +59,24 @@
 .post-card {
     margin-bottom: 5px;
 }
+
+.slogan-container {
+    display: flex;
+    align-items: center;
+}
+
+.slogan-container > h1 {
+    padding-left: 20px;
+}
+
+.promo {
+    margin-top: 20px;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.student-preview {
+    margin-right: 10px;
+}
