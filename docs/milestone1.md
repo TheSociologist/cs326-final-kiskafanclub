@@ -68,6 +68,7 @@ The menu bar is the top-most website navigation system on the platform. It inclu
 ### HTML Page
 ![Home HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
+Nice layout with login and signup buttons, menu/nav bar (shows up on all pages), a preview of college volunteer/mentor profiles, a search bar, and some images. Also have a mission statement/about us button for users to read more about the platform.
 
 ## Search results page (Kays)
 ### Wireframe
@@ -75,6 +76,7 @@ The menu bar is the top-most website navigation system on the platform. It inclu
 ### HTML Page
 ![Search HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
+Displays profiles of users given keywords that were searched for. Key words may include majors, EC activities, or specific universities. App will search for profiles that best match the request.
 
 ## Sign up page (Sugun)
 ### Wireframe
@@ -82,6 +84,7 @@ The menu bar is the top-most website navigation system on the platform. It inclu
 ### HTML Page
 ![Sign up HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
+The above image is a screenshot of where you will be prompted to either login to your account using your email and password. If you don't have one, it then prompts you to create an account using your email address.(for sing-in.html)
 
 
 ## Settings (Sugun)
@@ -90,6 +93,7 @@ The menu bar is the top-most website navigation system on the platform. It inclu
 ### HTML Page
 ![Settings HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
+The above image is a screenshot of the page where you can edit your profile information. The information here will be visible to other users. There are text boxes for first name, last name and a short description of yourself. Below that, you can link any url to your linkedin or portfolios or websites that you have created. You can also add your current location or where you may be generally located.(for settings.html)
 
 ## Profile (Sawyer)
 ### Wireframe
@@ -97,6 +101,7 @@ The menu bar is the top-most website navigation system on the platform. It inclu
 ### HTML Page
 ![Profile HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
+The following page is a snapshot of a random user's profile. This page will let high school students learn more about the college student whom they are chatting with and find out more about this student's hobbies, accomplishments, and personal information that they are comfortable sharing.
 
 ## Ongoing Meetings (Sawyer)
 ### Wireframe
@@ -104,3 +109,4 @@ The menu bar is the top-most website navigation system on the platform. It inclu
 ### HTML Page
 ![Ongoing HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
+This page is a dashboard of all ongoing meetings for different colleges. High school students could hop into any random meeting to learn more about that particular college. The filter option at the top allows for students to filter colleges alphabetically or by state.
