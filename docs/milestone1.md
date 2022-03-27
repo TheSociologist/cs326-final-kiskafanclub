@@ -98,6 +98,6 @@ The following page is a snapshot of a random user's profile. This page will let 
 ### Wireframe
 ![Ongoing Wireframe](https://drive.google.com/uc?id=1IE6nf2-VV5W6IYs7RZLPY1P22YeSzww5)
 ### HTML Page
-![Ongoing HTML](https://drive.google.com/uc?id=1qdROLITCAu7lyNkfHV1_esqfZAIdIRDe)
+![Ongoing HTML](https://drive.google.com/uc?id=1FBXeM6Pc4hu0bPLt4muETUh-zYsCChja)
 ### Description
 This page is a dashboard of all ongoing meetings for different colleges. High school students could hop into any random meeting to learn more about that particular college. The filter option at the top allows for students to filter colleges alphabetically or by state.
