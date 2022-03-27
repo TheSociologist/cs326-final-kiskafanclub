@@ -38,7 +38,7 @@ The dashboard provides users with a list of recent and trending question and ans
 
 ## Colleges (Ajan)
 ### Wireframe
-![Colleges Wireframe](https://drive.google.com/uc?id=13ORH7GNKiVq-rJAlADE4t5bVPEJxTL0y/view?usp=sharing)
+![Colleges Wireframe](https://drive.google.com/uc?id=13ORH7GNKiVq-rJAlADE4t5bVPEJxTL0y)
 ### HTML Page
 ### Description
 The colleges page gives users the ability to discover and compile colleges using filters and sorts. We hope this provides a more fine-grained way to look for colleges according to user preferences. Right now our ideas for filters include admission difficulty, majors required, sorting based on rankings according to US news or other sources, and location. We may add more if time allows. 
@@ -66,7 +66,7 @@ Displays profiles of users given keywords that were searched for. Key words may 
 
 ## Sign up page (Sugun)
 ### Wireframe
-![Sign up Wireframe](https://drive.google.com/uc?id=1MopKViwcG6O3M_At2QtHTAJnSNusaF1Y/view?usp=sharing)
+![Sign up Wireframe](https://drive.google.com/uc?id=1MopKViwcG6O3M_At2QtHTAJnSNusaF1Y)
 ### HTML Page
 ### Description
 The above image is a screenshot of where you will be prompted to either login to your account using your email and password. If you don't have one, it then prompts you to create an account using your email address.(for sing-in.html)
@@ -81,14 +81,14 @@ The above image is a screenshot of the page where you can edit your profile info
 
 ## Profile (Sawyer)
 ### Wireframe
-![Profile Wireframe](https://drive.google.com/uc?id=12nLYCVMbUpSijU13yFv4z0NXbQJOxMTO/view?usp=sharing)
+![Profile Wireframe](https://drive.google.com/uc?id=12nLYCVMbUpSijU13yFv4z0NXbQJOxMTO)
 ### HTML Page
 ### Description
 The following page is a snapshot of a random user's profile. This page will let high school students learn more about the college student whom they are chatting with and find out more about this student's hobbies, accomplishments, and personal information that they are comfortable sharing.
 
 ## Ongoing Meetings (Sawyer)
 ### Wireframe
-![Ongoing Wireframe](https://drive.google.com/uc?id=1IE6nf2-VV5W6IYs7RZLPY1P22YeSzww5/view?usp=sharing)
+![Ongoing Wireframe](https://drive.google.com/uc?id=1IE6nf2-VV5W6IYs7RZLPY1P22YeSzww5)
 ### HTML Page
 ### Description
 This page is a dashboard of all ongoing meetings for different colleges. High school students could hop into any random meeting to learn more about that particular college. The filter option at the top allows for students to filter colleges alphabetically or by state.
