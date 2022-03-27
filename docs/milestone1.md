@@ -49,7 +49,7 @@ The colleges page gives users the ability to discover and compile colleges using
 ### Wireframe
 ![Menu Wireframe](https://drive.google.com/uc?id=1x_6v5_q-oSddlnM0QtPAUyusvfGKucAA)
 ### HTML Page
-![Menu HTML](https://drive.google.com/uc?id=1NAnpjbLSlse-5S3QdWNcZen0uaB8c6jX)
+![Menu HTML](https://drive.google.com/uc?id=1KH4Aw7DrCcTTMg2ma2HzZxKgQ33tLG-5)
 ### Description
 The menu bar is the top-most website navigation system on the platform. It includes website details including an icon and title and links to each top-level page including home, collges, and the signed in user's profile and settings (within a dropdown). There's also a searchbar on the right that can be used to look for colleges, other users, questions, and meetings.
 
