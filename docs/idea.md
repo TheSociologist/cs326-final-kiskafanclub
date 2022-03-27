@@ -17,7 +17,6 @@ App where high school students seek information/advice about colleges and the co
 Also if volunteers set up profiles on the app or connect their linkedins, (and high school students do the same), we could use some kind of stable matching to match students with volunteers based on profile data. 
 
 # Important Components
-
 - High Schools
 - Colleges
 Students will say what high school and college they're a part of so the website can match them. 
