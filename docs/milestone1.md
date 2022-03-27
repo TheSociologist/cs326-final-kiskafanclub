@@ -38,9 +38,9 @@ The dashboard provides users with a list of recent and trending question and ans
 
 ## Colleges (Ajan)
 ### Wireframe
-![Colleges Wireframe](https://drive.google.com/file/d/13ORH7GNKiVq-rJAlADE4t5bVPEJxTL0y/view?usp=sharing)
+![Colleges Wireframe](https://drive.google.com/uc?id=13ORH7GNKiVq-rJAlADE4t5bVPEJxTL0y/view?usp=sharing)
 ### HTML Page
-![Colleges HTML](https://drive.google.com/uc?id=1Uhq6UOPirTkfKU1Kxcx4z1CwjrGx0Urn)
+![Colleges HTML](https://drive.google.com/uc?id=1qdROLITCAu7lyNkfHV1_esqfZAIdIRDe/view?usp=sharing)
 ### Description
 The colleges page gives users the ability to discover and compile colleges using filters and sorts. We hope this provides a more fine-grained way to look for colleges according to user preferences. Right now our ideas for filters include admission difficulty, majors required, sorting based on rankings according to US news or other sources, and location. We may add more if time allows. 
 
@@ -48,7 +48,7 @@ The colleges page gives users the ability to discover and compile colleges using
 ### Wireframe
 ![Menu Wireframe](https://drive.google.com/uc?id=1x_6v5_q-oSddlnM0QtPAUyusvfGKucAA)
 ### HTML Page
-![Menu HTML](https://drive.google.com/uc?id=1t4TiDaFKqpgk96Zu2cRRm0Im8jYu1WZC)
+![Menu HTML](https://drive.google.com/uc?id=1KH4Aw7DrCcTTMg2ma2HzZxKgQ33tLG-5/view?usp=sharing)
 ### Description
 The menu bar is the top-most website navigation system on the platform. It includes website details including an icon and title and links to each top-level page including home, collges, and the signed in user's profile and settings (within a dropdown). There's also a searchbar on the right that can be used to look for colleges, other users, questions, and meetings.
 
@@ -70,7 +70,7 @@ Displays profiles of users given keywords that were searched for. Key words may 
 
 ## Sign up page (Sugun)
 ### Wireframe
-![Sign up Wireframe](https://drive.google.com/uc?id=1Q7QJpKuG7EfCWq3kPHUNtfJEUogMqYUf)
+![Sign up Wireframe](https://drive.google.com/uc?id=1MopKViwcG6O3M_At2QtHTAJnSNusaF1Y/view?usp=sharing)
 ### HTML Page
 ![Sign up HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
@@ -87,7 +87,7 @@ The above image is a screenshot of the page where you can edit your profile info
 
 ## Profile (Sawyer)
 ### Wireframe
-![Profile Wireframe](https://drive.google.com/uc?id=1R0W8EitBXRD2wiVlWrk3RM3C6PUNfqzA)
+![Profile Wireframe](https://drive.google.com/uc?id=12nLYCVMbUpSijU13yFv4z0NXbQJOxMTO/view?usp=sharing)
 ### HTML Page
 ![Profile HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
@@ -95,7 +95,7 @@ The following page is a snapshot of a random user's profile. This page will let 
 
 ## Ongoing Meetings (Sawyer)
 ### Wireframe
-![Ongoing Wireframe](https://drive.google.com/uc?id=1e29Vtgsde-z7LpEy7g4_wtB2h0mlF-uF)
+![Ongoing Wireframe](https://drive.google.com/uc?id=1IE6nf2-VV5W6IYs7RZLPY1P22YeSzww5/view?usp=sharing)
 ### HTML Page
 ![Ongoing HTML](https://drive.google.com/uc?id=133F475jqW_SiPKXYvxtMY_SyIYpVndvW)
 ### Description
