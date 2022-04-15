@@ -81,7 +81,7 @@ class Server {
       }
     });
 
-    this.app.put('/post/update/post', async (req, res) => {
+    this.app.put('/post/update', async (req, res) => {
       try {
         const { id, name, age } = req.query;
         const post = await self.db.updatePost(id, name, age);
