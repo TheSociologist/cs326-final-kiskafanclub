@@ -22,7 +22,7 @@ export class College {
                     src="${this.banner}"
                     class="card-img-top" 
                     alt="banner"
-                    style="max-height: 200px;"
+                    style="height: 200px;"
                 >
                 <img
                     src="${this.icon}"
