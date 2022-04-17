@@ -1,0 +1,17 @@
+{
+    "name": "cs326-final-kiskafanclub",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server/index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server/index.js"
+    },
+    "author": "COMPSCI 326",
+    "license": "ISC",
+    "dependencies": {
+        "@faker-js/faker": "^6.1.2",
+        "express": "^4.17.3",
+        "morgan": "^1.10.0"
+    }
+}

@@ -9,6 +9,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script type="module" src="dashboard.js" defer></script>
     <script type="module" src="htmlutils.js" defer></script>
     <link rel="stylesheet" href="index.css" />
     <title>Matcher - College Name</title>
@@ -21,49 +22,29 @@
           <div class="card sidebar-card">
             <div class="card-body">
               <h5 class="card-title">Suggested Schools</h5>
-              <p class="card-text">These are a list of schools you might be interested in.</p>
+              <div id="schools">
+
+              </div>
             </div>
           </div>
           <div class="card sidebar-card">
             <div class="card-body">
               <h5 class="card-title">Suggested Tutors</h5>
-              <p class="card-text">These are a list of tutors you might be interested in.</p>
+              <div id="tutors">
+
+              </div>
             </div>
           </div>
         </div>
         <div class="col-6" id="feed">
-          <div class="card post-card">
-            <div class="card-body">
-              <a href="/post.html">
-                <h5 class="card-title">Does anyone know when the deadline to apply to UMass is?</h5>
-              </a>
-              <p class="card-text">Kinda worried about missing it. Thanks!</p>
-              <button type="button" class="btn btn-outline-primary">
-                <img src="https://cdn4.iconfinder.com/data/icons/neutro-award/32/upvote-512.png" class="upvote-icon" />
-                Upvote
-              </button>
-              <a href="#" class="btn btn-primary">Answer this question</a>
-            </div>
-          </div>
-          <div class="card post-card">
-            <div class="card-body">
-              <a href="/post.html">
-                <h5 class="card-title">How are the dorms in Northeast?</h5>
-              </a>
-              <p class="card-text">How old are they? Are they close to the gym?</p>
-              <button type="button" class="btn btn-outline-primary">
-                <img src="https://cdn4.iconfinder.com/data/icons/neutro-award/32/upvote-512.png" class="upvote-icon" />
-                Upvote
-              </button>
-              <a href="#" class="btn btn-primary">Answer this question</a>
-            </div>
-          </div>
         </div>
         <div class="col-3">
           <div class="card sidebar-card">
             <div class="card-body">
               <h5 class="card-title">Ongoing zoom meetings</h5>
-              <p class="card-text">This is a list of live sessions you might be interested in.</p>
+              <div id="meetings">
+
+              </div>
             </div>
           </div>
         </div>
