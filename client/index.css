@@ -89,3 +89,9 @@
 .hero {
     margin-top: 20px;
 }
+
+.comment-item {
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: whitesmoke
+}

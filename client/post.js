@@ -1,3 +1,9 @@
+const commonHeaders = {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }
 class Post {
     id
     title
@@ -6,6 +12,8 @@ class Post {
     liked
     createdAt
     editing = false
+    showComments = false
+    comments = []
 
     constructor(post) {
         this.id = post.id;
@@ -22,17 +30,55 @@ class Post {
         await fetch('/post/like?' + new URLSearchParams({id: this.id}), {method: 'PUT'})
     }
 
-    async toggleEditing() {
+    toggleEditing() {
         this.editing = !this.editing
         this.render()
+    }
+
+    async toggleComments() {
+        this.showComments = !this.showComments
+        if (this.showComments) {
+            const response = await fetch(`/post/comments?id=${this.id}`)
+            this.comments = await response.json()
+            this.render()
+        } else {
+            this.render()
+        }
     }
 
     async saveEdits() {
         this.title = document.getElementById(`post-card-title-${this.id}`).value
         this.text = document.getElementById(`post-card-text-${this.id}`).value
 
-        await fetch('/post/update?' + new URLSearchParams({id: this.id, title: this.title, text: this.text}), {method: 'PATCH'})
+        await fetch('/post/update?' + new URLSearchParams({id: this.id}), {
+            method: 'PATCH',
+            body: JSON.stringify({title: this.title, text: this.text}),
+            ...commonHeaders
+        })
         this.toggleEditing()
+    }
+
+    async createComment() {
+        const body = document.getElementById(`post-card-comment-${this.id}`).value
+        const response = await fetch(`/post/comments/create?` + new URLSearchParams({id: this.id}), {
+            method: 'POST',
+            body: JSON.stringify({text: body}),
+            ...commonHeaders
+        })
+        const comment = await response.json()
+
+        this.comments.unshift(comment)
+        this.render()
+    }
+
+
+    async deleteComment(commentId) {
+        await fetch(`/post/comment/delete?` + new URLSearchParams({id: this.id, commentId}), {
+            method: 'DELETE',
+        })
+
+        this.comments = this.comments.filter(({id}) => id !== commentId)
+        this.render()
     }
 
     render() {
@@ -96,10 +142,63 @@ class Post {
             editButton.innerHTML = `✎`
             editButton.classList.add('btn')
             editButton.style.marginLeft = '5px'
+
+            const commentButton = document.createElement('button')
+            commentButton.addEventListener('click', () => {
+                this.toggleComments()
+            })
+            commentButton.innerHTML = `💬`
+            commentButton.classList.add('btn')
+            commentButton.style.marginLeft = '5px'
     
             content.appendChild(upvoteButton)
             content.appendChild(editButton)
-        }       
+            content.appendChild(commentButton)
+        }
+        
+        if (this.showComments) {
+            console.log('rendering')
+            const commentSection = document.createElement('div')
+            commentSection.innerHTML = `
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="post-card-comment-${this.id}" placeholder="Comment">
+                    <label for="floatingInput">Comment</label>
+                </div>
+            `
+
+            card.appendChild(commentSection)
+
+            const subBtn = document.createElement('button')
+            subBtn.classList.add('btn', 'btn-primary')
+            subBtn.innerText = 'Submit'
+            subBtn.addEventListener('click', () => this.createComment())
+            
+            commentSection.appendChild(subBtn)
+
+
+            const commentsList = document.createElement('div')
+            commentsList.id = `comments-section-${this.id}`
+            this.comments.forEach(({text, id}) => {
+                const comment = document.createElement('div')
+                comment.innerHTML = `
+                    <div class="comment-item">
+                        <p>${text}</p>
+                        
+                    </div>
+                `
+                const delBtn = document.createElement('button')
+                delBtn.classList.add('btn')
+                delBtn.innerText = '🗑'
+                delBtn.addEventListener('click', () => this.deleteComment(id))
+
+                comment.appendChild(delBtn)
+                commentsList.appendChild(comment)
+            })
+
+            commentSection.appendChild(commentsList)
+
+        }
+
     }
 }
 

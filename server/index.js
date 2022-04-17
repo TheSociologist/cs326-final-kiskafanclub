@@ -71,6 +71,7 @@ app.post('/post/create', async (req, res) => {
   }
 });
 
+
 app.get('/post/read', async (req, res) => {
   try {
     const { id } = req.query;
@@ -104,6 +105,43 @@ app.delete('/post/delete', async (req, res) => {
     const { id } = req.query;
     const post = await self.db.deletePost(id);
     res.send(JSON.stringify(post));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/post/comments', async (req, res) => {
+  try {
+    const { id } = req.query;
+    const comments = []
+    for (let i = 0; i < 100; i++) {
+      const comment = {
+        id: faker.datatype.number(),
+        text: faker.lorem.paragraph(),
+      }
+      comments.push(comment)
+    }
+    res.send(JSON.stringify(comments));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/post/comments/create', async (req, res) => {
+  try {
+    
+    res.send({
+      ...req.body,
+      id: faker.datatype.number(),
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.delete('/post/comments/delete', async (req, res) => {
+  try {
+    res.send({status: 'success'});
   } catch (err) {
     res.status(500).send(err);
   }
@@ -177,6 +215,19 @@ app.get('/ongoing-meetings', async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+
+app.get('/school', async (req, res) => {
+
+  const school = {
+    id: faker.datatype.number(),
+    name: faker.commerce.product(),
+    banner: faker.image.abstract(),
+    icon: faker.image.abstract(),
+    description: faker.lorem.paragraph(),
+  }
+  res.send(JSON.stringify(school));
+})
 
 app.get('/schools', async (req, res) => {
   try {
