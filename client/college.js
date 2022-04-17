@@ -1,4 +1,4 @@
-class College {
+export class College {
     name
     id
     banner
@@ -22,6 +22,7 @@ class College {
                     src="${this.banner}"
                     class="card-img-top" 
                     alt="banner"
+                    style="max-height: 200px;"
                 >
                 <img
                     src="${this.icon}"
@@ -43,8 +44,8 @@ class College {
     }
 }
 
-export const renderCollegeList = (element, posts) => {
-    posts.forEach(c => {
+export const renderCollegeList = (element, colleges) => {
+    colleges.forEach(c => {
         const div = document.createElement('div')
         element.appendChild(div)
         const card = new College(c)

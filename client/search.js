@@ -1,5 +1,5 @@
 const search = async () => {
-    let params = (new URL(document.location)).searchParams;
+    const params = (new URL(document.location)).searchParams;
     const query = params.get('query')
     document.getElementById('search-title').innerText = `Searching for: "${query}"`
     const response = await fetch('/search?' + new URLSearchParams({query}))

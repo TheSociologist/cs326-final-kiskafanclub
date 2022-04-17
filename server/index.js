@@ -266,6 +266,38 @@ app.get('/schools', async (req, res) => {
   }
 });
 
+app.get('/college', (req, res) => {
+  const school = {
+    id: faker.datatype.number(),
+    name: faker.commerce.product(),
+    banner: faker.image.abstract(),
+    icon: faker.image.abstract(),
+    description: faker.lorem.paragraph(),
+  }
+  res.send(JSON.stringify(school));
+})
+
+
+app.get('/college/posts', async (req, res) => {
+  try {
+    const posts = []
+    for (let i = 0; i < 100; i++) {
+      const post = {
+        id: faker.datatype.number(),
+        title: faker.commerce.product(),
+        text: faker.lorem.paragraph(),
+        numLikes: faker.datatype.number(),
+        liked: faker.datatype.boolean(),
+        createdAt: faker.date.recent()
+      }
+      posts.push(post)
+    }
+    res.send(JSON.stringify(posts));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.all('*', async (request, response) => {
   response.status(404).send(`Not found: ${request.path}`);
 });
