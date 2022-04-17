@@ -178,6 +178,25 @@ app.get('/ongoing-meetings', async (req, res) => {
   }
 });
 
+app.get('/schools', async (req, res) => {
+  try {
+    const schools = []
+    for (let i = 0; i < 5; i++) {
+      const school = {
+        id: faker.datatype.number(),
+        name: faker.commerce.product(),
+        banner: faker.image.abstract(),
+        icon: faker.image.abstract(),
+        description: faker.lorem.paragraph(),
+      }
+      schools.push(school)
+    }
+    res.send(JSON.stringify(schools));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.all('*', async (request, response) => {
   response.status(404).send(`Not found: ${request.path}`);
 });
