@@ -1,5 +1,4 @@
 import { renderPostList } from './post.js'
-
 const renderFeed = async () => {
     const response = await fetch('/feed')
     const posts = await response.json()

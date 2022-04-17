@@ -11,6 +11,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(logger('combined'));
 app.use(express.static('client'))
 
+app.get('/search', async (req, res) => {
+  const { query } = req.query
+  const schools = []
+  for (let i = 0; i < 5; i++) {
+    const school = {
+      id: faker.datatype.number(),
+      name: faker.commerce.product(),
+      banner: faker.image.abstract(),
+      icon: faker.image.abstract(),
+      description: faker.lorem.paragraph(),
+    }
+    schools.push(school)
+  }
+  res.send(JSON.stringify(schools));
+})
+
 app.post('/profile/create', async (req, res) => {
   try {
     const { id, name, university, description } = req.query;
@@ -202,15 +218,17 @@ app.get('/recommended-tutors', async (req, res) => {
 
 app.get('/ongoing-meetings', async (req, res) => {
   try {
-    const schools = []
+    const meetings = []
     for (let i = 0; i < 5; i++) {
-      const school = {
+      const meeting = {
         id: faker.datatype.number(),
         name: faker.commerce.product(),
+        from: faker.date.recent(),
+        to: faker.date.recent()
       }
-      schools.push(school)
+      meetings.push(meeting)
     }
-    res.send(JSON.stringify(schools));
+    res.send(JSON.stringify(meetings));
   } catch (err) {
     res.status(500).send(err);
   }
