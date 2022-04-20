@@ -3,7 +3,7 @@ search through schools database, crud operations for posts, profiles, and post c
 
 IMAGES:
 Profiles:
-![image](cs326-final-kiskafanclub/docs/Screen Shot 2022-04-20 at 2.27.17 PM.png)
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.27.17%20PM.png)
 View a student profile. Includes their basic information and resume
 
 Edit Data:
