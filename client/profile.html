@@ -31,38 +31,37 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Change Your Name">
+            <input type="text" class="form-control" id="nameInput" aria-describedby="emailHelp" placeholder="Change Your Name">
           </div>
           <p></p>
           <div class="form-group">
             <label for="exampleInputPassword1">University/College</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Change Your University/College">
+            <input type="text" class="form-control" id="uniInput" placeholder="Change Your University/College">
           </div>
           <p></p>
           <div class="form-group">
             <label for="exampleInputPassword1">Year of Graduation</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Change Your Year of Graduation">
+            <input type="text" class="form-control" id="yogInput" placeholder="Change Your Year of Graduation">
           </div>
           <p></p>
           <div class="form-group">
             <label for="exampleInputPassword1">Major</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Change Your Major">
+            <input type="text" class="form-control" id="majorInput" placeholder="Change Your Major">
           </div>          
           <p></p>
           <div class="form-group">
             <label for="exampleInputPassword1">About Me</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Change Your About Me">
-          </div>
+            <textarea name="paragraph_text" cols="50" rows="10" id="aboutMeInput"></textarea>          </div>
           <p></p>
           <div class="form-group">
             <label for="exampleInputPassword1">Resume</label>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" id="resumeFile">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+        <button type="button" class="btn btn-primary" id = 'saveButton'>Save changes</button>
       </div>
     </div>
   </div>
@@ -80,7 +79,7 @@
                   </div>
                     <div class="col-sm-9 text-secondary">
                       <p></p>
-                      <h4 class="m-b-1"><strong>John Smith</strong></h4>
+                      <h4 class="m-b-1"><strong id = 'user-name'>John Smith</strong></h4>
                       <p class="m-b-10">UMass Amherst</p>                  
                     </div>
                   </div>

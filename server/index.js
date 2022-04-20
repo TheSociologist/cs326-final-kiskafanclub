@@ -272,22 +272,23 @@ app.get('/profile/create', async (req, res) => {
   }
 });
 
+//make fetch to this route and get object with all profile info fields
+//document.getelementbyid each element from the server
+//save data im fetching from server using variable, let profile
+//every time i make fetch to backend for profile i set that variable equal to what i get from the server
+//create a function that handles variable to field mapping
 app.post('/profile/read', async (req, res) => {
   try {
-    const profiles = []
-    for (let i = 0; i < 5; i++) {
-      const profile = {
-        id: faker.datatype.number(),
-        name: faker.commerce.product(),
-        university: faker.commerce.product(),
-        gradYear: faker.datatype.number(2030),
-        major: faker.commerce.product(),
-        aboutMe: faker.lorem.paragraph(),
-        resume: faker.image.technics(),
-      }
-      profiles.push(profile);
+    const profile = {
+      id: faker.datatype.number(),
+      name: faker.commerce.product(),
+      university: faker.commerce.product(),
+      gradYear: faker.datatype.number(2030),
+      major: faker.commerce.product(),
+      aboutMe: faker.lorem.paragraph(),
+      resume: faker.image.technics(),
     }
-    res.send(JSON.stringify(profiles));
+    res.send(JSON.stringify(profile));
   } catch (err) {
     res.status(500).send(err);
   }
