@@ -7,5 +7,5 @@ To build project from VSCode, use the following series of commands:
 4) heroku login
 5) git init
 6) git add . && git commit -m "deployment"
-7) git push heroku main
+7) git push heroku (master)/(main)
 8) heroku open
