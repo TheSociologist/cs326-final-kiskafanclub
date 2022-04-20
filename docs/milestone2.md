@@ -15,7 +15,7 @@ Home Page:
 Can navigate the entire web app from here. Can view some featured student profiles, sign in/up, and view top notifcations/announcements and ongoing meetings
 
 Search results:
-![image](cs326-final-kiskafanclub/docs/Screen Shot 2022-04-20 at 2.34.36 PM.png)
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.34.36%20PM.png)
 Provides search which include most relevant student profiles, posts, and universities
 
 Explore Colleges:
