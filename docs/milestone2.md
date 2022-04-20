@@ -79,10 +79,10 @@ https://kiska-fan-club-1.herokuapp.com/
 
 # Distribution of labor:
 
-- Kays developed initial server which included basic crud operations for dealing with profile and post information. Also implemented database code that handle profile and post crud using sql.
+- Kays: Developed initial server which included basic crud operations for dealing with profile and post information. Also implemented database code that handle profile and post crud using sql.
 
 * Ajan: Handled post, feed, and comments backend routes and frontend operations 
 
-- Sawyer...
+- Sawyer: Created CRUD operations for ongoing meetings and profile sign up, along with CRUD operations for the edit profile page. 
 
 - Sugun...
