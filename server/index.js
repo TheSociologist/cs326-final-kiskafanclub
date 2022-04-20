@@ -263,9 +263,9 @@ app.delete('/ongoing-meetings/delete', async (req, res) => {
   }
 });
 
-app.get('/profile/create', async (req, res) => {
+app.post('/profile/create', async (req, res) => {
   try {
-    const { id } = req.body;
+    const { name, password, email } = req.body;
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -342,6 +342,18 @@ app.get('/college/posts', async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
   }
+});
+
+
+
+app.post('/sign-in', async(req, res)=>{
+  try{
+    const{password, email} = req.body;
+
+    res.send(JSON.stringify({value:'success'}));
+    } catch(err){
+      res.status(500).send(err);
+    }
 });
 
 app.all('*', async (request, response) => {

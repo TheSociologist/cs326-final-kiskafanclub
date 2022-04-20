@@ -1,9 +1,18 @@
 
 
-document.getElementById('signIn').addEventListener('click',async () => {
-	const response = await fetch('/sign-in', {
+
+
+
+document.getElementById('signUp').addEventListener('click', async() => {
+    const password = document.getElementById('password').value
+    const cpassword = document.getElementById('confirm-password').value
+    if(password !== cpassword){
+    return
+    }
+    const response = await fetch('/profile/create', {
 		method: 'POST',
 		body:JSON.stringify( {
+            name: document.getElementById('name').value,
 			email: document.getElementById('email').value,
 			password: document.getElementById('password').value
 		}),
@@ -17,4 +26,3 @@ document.getElementById('signIn').addEventListener('click',async () => {
 		document.location.href = '/dashboard.html'
 	}
 });
-
