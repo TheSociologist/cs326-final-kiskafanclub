@@ -4,7 +4,7 @@ Kiska Fan club
 # Web Application Name
 Matcher
 
-# API Specification
+# API Specification: 
 * /colleges - get a list of colleges 
 * /colleges/read?college_id - view a single college in more detail 
 * /college/read/posts?college_id - get all the posts for a college 
@@ -33,14 +33,29 @@ Matcher
 * /meetings/create?meetingId - create a new meeting
 * /meetings/delete?meetingId - delete a meeting
 
-# Labor Division Breakdown
+# IMAGES:
+## Profiles:
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.27.17%20PM.png)
+View a student profile. Includes their basic information and resume
 
-* Sugun: Handled sign up and sign in
-* Sawyer: Handled profle and meeting-related
-* Kays: Set up boilerplate code for server and database files
-* Ajan: Handled post, feed, and comments
+## Edit Data:
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.31.06%20PM.png)
+Can update user profile data here
 
-# User Interface
+## Home Page:
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.31.59%20PM.png)
+Can navigate the entire web app from here. Can view some featured student profiles, sign in/up, and view top notifcations/announcements and ongoing meetings
+
+## Search results:
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.34.36%20PM.png)
+Provides search which include most relevant student profiles, posts, and universities
+
+## Explore Colleges:
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.34.57%20PM.png)
+Allows you to search for colleges based on certain criteria including state or program
+
+
+# CRUD User Interface
 
 ## Posts
 
@@ -58,5 +73,16 @@ Users can view, create, edit, and delete posts. They can also view, create, and 
 
 Users can view, create (through sign up), update, and delete (through account deletion) their profiles for external display. 
 
-# Heroku Application URL
-[Matcher](https://kiska-fan-club-1.herokuapp.com)
+
+## URL: 
+https://kiska-fan-club-1.herokuapp.com/
+
+# Distribution of labor:
+
+- Kays developed initial server which included basic crud operations for dealing with profile and post information. Also implemented database code that handle profile and post crud using sql.
+
+* Ajan: Handled post, feed, and comments backend routes and frontend operations 
+
+- Sawyer...
+
+- Sugun...
