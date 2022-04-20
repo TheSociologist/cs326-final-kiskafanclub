@@ -5,12 +5,14 @@
     "main": "server/index.js",
     "type": "module",
     "scripts": {
+        "deploy": "copyfiles client/* server/* package*.json deploy",
         "start": "node server/index.js"
     },
     "author": "COMPSCI 326",
     "license": "ISC",
     "dependencies": {
         "@faker-js/faker": "^6.1.2",
+        "copyfiles": "^2.4.1",
         "express": "^4.17.3",
         "morgan": "^1.10.0"
     }
