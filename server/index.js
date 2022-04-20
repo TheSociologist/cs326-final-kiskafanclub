@@ -27,56 +27,6 @@ app.get('/search', async (req, res) => {
   res.send(JSON.stringify(schools));
 })
 
-app.post('/profile/create', async (req, res) => {
-  try {
-    const { id, name, university, description } = req.query;
-    const profile = await self.db.createProfile(id, name, university, description);
-    res.send(JSON.stringify(profile));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-app.get('/profile/read', async (req, res) => {
-  try {
-    const { id } = req.query;
-    const profile = await self.db.readProfile(id);
-    res.send(JSON.stringify(profile));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-app.put('/profile/update', async (req, res) => {
-  try {
-    const { id, name, university, description } = req.query;
-    const profile = await self.db.updateProfile(id, name, university, description);
-    res.send(JSON.stringify(profile));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-app.delete('/profile/delete', async (req, res) => {
-  try {
-    const { id } = req.query;
-    const profile = await self.db.deleteProfile(id);
-    res.send(JSON.stringify(profile));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-
-app.get('/profiles', async (req, res) => {
-  try {
-    const profiles = await self.db.readAllProfiles();
-    res.send(JSON.stringify(profiles));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
 app.post('/post/create', async (req, res) => {
   try {
     const { id, name, content } = req.query;
@@ -182,7 +132,6 @@ app.get('/feed', async (req, res) => {
     res.status(500).send(err);
   }
 });
-
 
 app.get('/recommended-schools', async (req, res) => {
   try {
@@ -306,6 +255,54 @@ app.put('/ongoing-meetings/update', async (req, res) => {
 });
 
 app.delete('/ongoing-meetings/delete', async (req, res) => {
+  try {
+    const { id } = req.query;
+    res.send(JSON.stringify({value: 'success'}));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/profile/create', async (req, res) => {
+  try {
+    const { id } = req.body;
+    res.send(JSON.stringify({value: 'success'}));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/profile/read', async (req, res) => {
+  try {
+    const profiles = []
+    for (let i = 0; i < 5; i++) {
+      const profile = {
+        id: faker.datatype.number(),
+        name: faker.commerce.product(),
+        university: faker.commerce.product(),
+        gradYear: faker.datatype.number(2030),
+        major: faker.commerce.product(),
+        aboutMe: faker.lorem.paragraph(),
+        resume: faker.image.technics(),
+      }
+      profiles.push(profile);
+    }
+    res.send(JSON.stringify(profiles));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.put('/profile/update', async (req, res) => {
+  try {
+    const { id, name, university, gradYear, major, aboutMe, resume } = req.body;
+    res.send(JSON.stringify({value: 'success'}));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.delete('/profile/delete', async (req, res) => {
   try {
     const { id } = req.query;
     res.send(JSON.stringify({value: 'success'}));
