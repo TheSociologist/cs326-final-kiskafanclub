@@ -85,4 +85,4 @@ https://kiska-fan-club-1.herokuapp.com/
 
 - Sawyer: Created CRUD operations for ongoing meetings and profile sign up, along with CRUD operations for the edit profile page. 
 
-- Sugun...
+- Sugun: Worked on the sign in and sign up pages and including the front-end and back-end CRUD operations.
