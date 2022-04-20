@@ -350,6 +350,6 @@ app.all('*', async (request, response) => {
   response.status(404).send(`Not found: ${request.path}`);
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
