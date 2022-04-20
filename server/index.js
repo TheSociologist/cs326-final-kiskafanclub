@@ -266,6 +266,54 @@ app.get('/schools', async (req, res) => {
   }
 });
 
+app.get('/ongoing-meetings/create', async (req, res) => {
+  try {
+    const { id } = req.body;
+    res.send(JSON.stringify({value: 'success'}));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/ongoing-meetings/read', async (req, res) => {
+  try {
+    const ongoingMeetings = []
+    for (let i = 0; i < 5; i++) {
+      const ongoingMeeting = {
+        id: faker.datatype.number(),
+        name: faker.commerce.product(),
+        university: faker.commerce.product(),
+        description: faker.lorem.paragraph(),
+        logo: faker.image.abstract(),
+        profile: faker.image.abstract(),
+        meetingLength: faker.datatype.number(120),
+      }
+      ongoingMeetings.push(ongoingMeeting);
+    }
+    res.send(JSON.stringify(ongoingMeetings));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.put('/ongoing-meetings/update', async (req, res) => {
+  try {
+    const { id, name, university, description, logo, profile, meetingLength } = req.body;
+    res.send(JSON.stringify({value: 'success'}));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.delete('/ongoing-meetings/delete', async (req, res) => {
+  try {
+    const { id } = req.query;
+    res.send(JSON.stringify({value: 'success'}));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.get('/college', (req, res) => {
   const school = {
     id: faker.datatype.number(),
