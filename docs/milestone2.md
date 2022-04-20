@@ -19,7 +19,7 @@ Search results:
 Provides search which include most relevant student profiles, posts, and universities
 
 Explore Colleges:
-![image](cs326-final-kiskafanclub/docs/Screen Shot 2022-04-20 at 2.34.57 PM.png)
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.34.57%20PM.png)
 Allows you to search for colleges based on certain criteria including state or program
 
 URL: 
