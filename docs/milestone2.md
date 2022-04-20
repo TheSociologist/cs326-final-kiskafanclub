@@ -7,7 +7,7 @@ Profiles:
 View a student profile. Includes their basic information and resume
 
 Edit Data:
-![image](cs326-final-kiskafanclub/docs/Screen Shot 2022-04-20 at 2.31.06 PM.png)
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.31.06%20PM.png)
 Can update user profile data here
 
 Home Page:
