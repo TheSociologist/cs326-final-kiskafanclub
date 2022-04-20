@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(logger('combined'));
-app.use(express.static('client'))
+app.use(express.static('client'));
 
 app.get('/search', async (req, res) => {
   const { query } = req.query
