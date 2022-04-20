@@ -3,7 +3,7 @@ import logger from 'morgan'
 import { faker } from '@faker-js/faker';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Add Middleware
 app.use(express.json());
@@ -347,6 +347,6 @@ app.all('*', async (request, response) => {
   response.status(404).send(`Not found: ${request.path}`);
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
