@@ -1,0 +1,12 @@
+.sign-in-card {
+	padding: 20px;
+}
+.sign-in-card > h1 {
+	text-align: center;
+}
+
+.submit-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
