@@ -54,12 +54,7 @@ Provides search which include most relevant student profiles, posts, and univers
 ![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%202.34.57%20PM.png)
 Allows you to search for colleges based on certain criteria including state or program
 
-
-# CRUD User Interface
-
 ## Posts
-
-{Post w/ comments Image}
 
 {Post being edited image}
 
