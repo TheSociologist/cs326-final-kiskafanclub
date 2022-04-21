@@ -30,7 +30,7 @@ const renderSuggestedTutors = async () => {
 }
 
 const renderOngoingMeetings = async () => {
-    const response = await fetch('/ongoing-meetings')
+    const response = await fetch('/ongoing-meetings/read')
     const meetings = await response.json()
     renderList(document.getElementById('meetings'), 'meeting', meetings)
 }

@@ -1,6 +1,6 @@
 import express from 'express';
 import logger from 'morgan'
-import { faker } from '@faker-js/faker';
+import { createPost, updatePost, likePost, deletePost, deleteComment, updateProfile, getFeed, createAccount, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, verifyCreds } from './database.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,24 +13,13 @@ app.use(express.static('client'));
 
 app.get('/search', async (req, res) => {
   const { query } = req.query
-  const schools = []
-  for (let i = 0; i < 5; i++) {
-    const school = {
-      id: faker.datatype.number(),
-      name: faker.commerce.product(),
-      banner: faker.image.abstract(),
-      icon: faker.image.abstract(),
-      description: faker.lorem.paragraph(),
-    }
-    schools.push(school)
-  }
+  const schools = await searchSchools()
   res.send(JSON.stringify(schools));
 })
 
 app.post('/post/create', async (req, res) => {
   try {
-    const { id, name, content } = req.query;
-    const post = await self.db.createPost(id, name, content);
+    const post = await createPost(req.body)
     res.send(JSON.stringify(post));
   } catch (err) {
     res.status(500).send(err);
@@ -41,7 +30,7 @@ app.post('/post/create', async (req, res) => {
 app.get('/post/read', async (req, res) => {
   try {
     const { id } = req.query;
-    const post = await self.db.readPost(id);
+    const post = await getPostById(id)
     res.send(JSON.stringify(post));
   } catch (err) {
     res.status(500).send(err);
@@ -50,7 +39,7 @@ app.get('/post/read', async (req, res) => {
 
 app.patch('/post/update', async (req, res) => {
   try {
-    const { id, name, age } = req.query;
+    await updatePost(req.body)
     res.send(JSON.stringify({status: 'successful'}));
   } catch (err) {
     res.status(500).send(err);
@@ -60,6 +49,8 @@ app.patch('/post/update', async (req, res) => {
 app.put('/post/like', async (req, res) => {
   try {
     const { id } = req.query;
+    const userId = 2;
+    await likePost(id, userId)
     res.send(JSON.stringify({status: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -69,8 +60,8 @@ app.put('/post/like', async (req, res) => {
 app.delete('/post/delete', async (req, res) => {
   try {
     const { id } = req.query;
-    const post = await self.db.deletePost(id);
-    res.send(JSON.stringify(post));
+    await deletePost(id);
+    res.send(JSON.stringify({status: 'deleted successfully'}));
   } catch (err) {
     res.status(500).send(err);
   }
@@ -79,14 +70,7 @@ app.delete('/post/delete', async (req, res) => {
 app.get('/post/comments', async (req, res) => {
   try {
     const { id } = req.query;
-    const comments = []
-    for (let i = 0; i < 100; i++) {
-      const comment = {
-        id: faker.datatype.number(),
-        text: faker.lorem.paragraph(),
-      }
-      comments.push(comment)
-    }
+    const comments = await getComments(id)
     res.send(JSON.stringify(comments));
   } catch (err) {
     res.status(500).send(err);
@@ -95,11 +79,8 @@ app.get('/post/comments', async (req, res) => {
 
 app.post('/post/comments/create', async (req, res) => {
   try {
-    
-    res.send({
-      ...req.body,
-      id: faker.datatype.number(),
-    });
+    const comment = await createComment(req.body)
+    res.send(comment);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -107,6 +88,8 @@ app.post('/post/comments/create', async (req, res) => {
 
 app.delete('/post/comments/delete', async (req, res) => {
   try {
+    const {commentId} = req.query;
+    await deleteComment(commentId)
     res.send({status: 'success'});
   } catch (err) {
     res.status(500).send(err);
@@ -114,19 +97,10 @@ app.delete('/post/comments/delete', async (req, res) => {
 });
 
 app.get('/feed', async (req, res) => {
+  console.log('over here')
   try {
-    const posts = []
-    for (let i = 0; i < 100; i++) {
-      const post = {
-        id: faker.datatype.number(),
-        title: faker.commerce.product(),
-        text: faker.lorem.paragraph(),
-        numLikes: faker.datatype.number(),
-        liked: faker.datatype.boolean(),
-        createdAt: faker.date.recent()
-      }
-      posts.push(post)
-    }
+    const posts = await getFeed()
+    console.log(posts)
     res.send(JSON.stringify(posts));
   } catch (err) {
     res.status(500).send(err);
@@ -135,14 +109,7 @@ app.get('/feed', async (req, res) => {
 
 app.get('/recommended-schools', async (req, res) => {
   try {
-    const schools = []
-    for (let i = 0; i < 5; i++) {
-      const school = {
-        id: faker.datatype.number(),
-        name: faker.commerce.product(),
-      }
-      schools.push(school)
-    }
+    const schools = await getRecommendedSchools()
     res.send(JSON.stringify(schools));
   } catch (err) {
     res.status(500).send(err);
@@ -151,74 +118,26 @@ app.get('/recommended-schools', async (req, res) => {
 
 app.get('/recommended-tutors', async (req, res) => {
   try {
-    const schools = []
-    for (let i = 0; i < 5; i++) {
-      const school = {
-        id: faker.datatype.number(),
-        name: faker.commerce.product(),
-      }
-      schools.push(school)
-    }
-    res.send(JSON.stringify(schools));
+    const tutors = await getRecommendedTutors()
+    res.send(JSON.stringify(tutors));
   } catch (err) {
     res.status(500).send(err);
   }
 });
-
-app.get('/ongoing-meetings', async (req, res) => {
-  try {
-    const meetings = []
-    for (let i = 0; i < 5; i++) {
-      const meeting = {
-        id: faker.datatype.number(),
-        name: faker.commerce.product(),
-        from: faker.date.recent(),
-        to: faker.date.recent()
-      }
-      meetings.push(meeting)
-    }
-    res.send(JSON.stringify(meetings));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-
-app.get('/school', async (req, res) => {
-
-  const school = {
-    id: faker.datatype.number(),
-    name: faker.commerce.product(),
-    banner: faker.image.abstract(),
-    icon: faker.image.abstract(),
-    description: faker.lorem.paragraph(),
-  }
-  res.send(JSON.stringify(school));
-})
 
 app.get('/schools', async (req, res) => {
   try {
-    const schools = []
-    for (let i = 0; i < 5; i++) {
-      const school = {
-        id: faker.datatype.number(),
-        name: faker.commerce.product(),
-        banner: faker.image.abstract(),
-        icon: faker.image.abstract(),
-        description: faker.lorem.paragraph(),
-      }
-      schools.push(school)
-    }
+    const schools = await getSchools()
     res.send(JSON.stringify(schools));
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-app.get('/ongoing-meetings/create', async (req, res) => {
+app.post('/ongoing-meetings/create', async (req, res) => {
   try {
-    const { id } = req.body;
-    res.send(JSON.stringify({value: 'success'}));
+    const meeting = createMeeting(req.body)
+    res.send(JSON.stringify(meeting));
   } catch (err) {
     res.status(500).send(err);
   }
@@ -226,19 +145,7 @@ app.get('/ongoing-meetings/create', async (req, res) => {
 
 app.get('/ongoing-meetings/read', async (req, res) => {
   try {
-    const ongoingMeetings = []
-    for (let i = 0; i < 5; i++) {
-      const ongoingMeeting = {
-        id: faker.datatype.number(),
-        name: faker.commerce.product(),
-        university: faker.commerce.product(),
-        description: faker.lorem.paragraph(),
-        logo: faker.image.abstract(),
-        profile: faker.image.abstract(),
-        meetingLength: faker.datatype.number(120),
-      }
-      ongoingMeetings.push(ongoingMeeting);
-    }
+    const ongoingMeetings = await getOngoingMeetings()
     res.send(JSON.stringify(ongoingMeetings));
   } catch (err) {
     res.status(500).send(err);
@@ -247,7 +154,7 @@ app.get('/ongoing-meetings/read', async (req, res) => {
 
 app.put('/ongoing-meetings/update', async (req, res) => {
   try {
-    const { id, name, university, description, logo, profile, meetingLength } = req.body;
+    await updateMeeting(req.body)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -257,6 +164,7 @@ app.put('/ongoing-meetings/update', async (req, res) => {
 app.delete('/ongoing-meetings/delete', async (req, res) => {
   try {
     const { id } = req.query;
+    await deleteMeeting(id)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -266,6 +174,7 @@ app.delete('/ongoing-meetings/delete', async (req, res) => {
 app.post('/profile/create', async (req, res) => {
   try {
     const { name, password, email } = req.body;
+    await createAccount(name, email, password)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -279,15 +188,7 @@ app.post('/profile/create', async (req, res) => {
 //create a function that handles variable to field mapping
 app.get('/profile/read', async (req, res) => {
   try {
-    const profile = {
-      id: faker.datatype.number(),
-      name: faker.commerce.product(),
-      university: faker.commerce.product(),
-      gradYear: faker.datatype.number(2030),
-      major: faker.commerce.product(),
-      aboutMe: faker.lorem.paragraph(),
-      resume: faker.image.technics(),
-    }
+    const profile = await getProfile()
     res.send(JSON.stringify(profile));
   } catch (err) {
     res.status(500).send(err);
@@ -296,7 +197,7 @@ app.get('/profile/read', async (req, res) => {
 
 app.put('/profile/update', async (req, res) => {
   try {
-    const { id, name, university, gradYear, major, aboutMe, resume } = req.body;
+    await updateProfile(req.body)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -306,38 +207,23 @@ app.put('/profile/update', async (req, res) => {
 app.delete('/profile/delete', async (req, res) => {
   try {
     const { id } = req.query;
+
+    await deleteAccount(id)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-app.get('/college', (req, res) => {
-  const school = {
-    id: faker.datatype.number(),
-    name: faker.commerce.product(),
-    banner: faker.image.abstract(),
-    icon: faker.image.abstract(),
-    description: faker.lorem.paragraph(),
-  }
-  res.send(JSON.stringify(school));
+app.get('/college', async (req, res) => {
+  const college = await getSchoolById(req.query.id)
+  res.send(JSON.stringify(college));
 })
 
 
 app.get('/college/posts', async (req, res) => {
   try {
-    const posts = []
-    for (let i = 0; i < 100; i++) {
-      const post = {
-        id: faker.datatype.number(),
-        title: faker.commerce.product(),
-        text: faker.lorem.paragraph(),
-        numLikes: faker.datatype.number(),
-        liked: faker.datatype.boolean(),
-        createdAt: faker.date.recent()
-      }
-      posts.push(post)
-    }
+    const posts = await getCollegePosts(req.query.id)
     res.send(JSON.stringify(posts));
   } catch (err) {
     res.status(500).send(err);
@@ -348,9 +234,14 @@ app.get('/college/posts', async (req, res) => {
 
 app.post('/sign-in', async(req, res)=>{
   try{
-    const{password, email} = req.body;
-
-    res.send(JSON.stringify({value:'success'}));
+    const {password, email} = req.body;
+    const result = await verifyCreds(email, password);
+    if (result) {
+      res.send(JSON.stringify({value: 'success'}));
+    } else {
+      res.status(403).send(JSON.stringify({value: 'failure'}));
+    }
+    
     } catch(err){
       res.status(500).send(err);
     }
