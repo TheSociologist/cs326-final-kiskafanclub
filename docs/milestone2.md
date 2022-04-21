@@ -63,8 +63,6 @@ Users can view, create, edit, and delete posts.
 
 
 ![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%208.52.59%20PM.png)
-Users can view, create, edit, and delete posts. They can also view, create, and delete comments by clicking on the corresponding button. 
-
 They can also view, create, and delete comments by clicking on the corresponding button. 
 
 
