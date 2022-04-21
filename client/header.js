@@ -23,6 +23,9 @@ function includeHTML() {
                                 <li class="nav-item">
                                 <a class="nav-link" href="/colleges.html">Colleges</a>
                                 </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="/ongoing-meetings.html">Meetings</a>
+                                </li>
                                 <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Me
