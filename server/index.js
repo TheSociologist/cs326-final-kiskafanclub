@@ -224,7 +224,7 @@ app.get('/ongoing-meetings/create', async (req, res) => {
   }
 });
 
-app.post('/ongoing-meetings/read', async (req, res) => {
+app.get('/ongoing-meetings/read', async (req, res) => {
   try {
     const ongoingMeetings = []
     for (let i = 0; i < 5; i++) {
@@ -277,7 +277,7 @@ app.get('/profile/create', async (req, res) => {
 //save data im fetching from server using variable, let profile
 //every time i make fetch to backend for profile i set that variable equal to what i get from the server
 //create a function that handles variable to field mapping
-app.post('/profile/read', async (req, res) => {
+app.get('/profile/read', async (req, res) => {
   try {
     const profile = {
       id: faker.datatype.number(),

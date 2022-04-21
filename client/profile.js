@@ -34,9 +34,12 @@ async function getUserData() {
 
 function setProfileElements() {
     // go through each profile element and set their value to the corresponding value in the profile object
-    document.getElementById('user-name').value = profile.name;
-    document.getElementById('school-name').value = profile.university;
-    document.getElementById('yogStudent').value = profile.gradYear;
-    document.getElementById('studentMajor').value = profile.major;
-    document.getElementById('aboutMePara').value = profile.aboutMe;
+    document.getElementById('user-name').innerText = 'Test Here'
+
+    document.getElementById('school-name').innerText = profile.university;
+    document.getElementById('yogStudent').innerText = profile.gradYear;
+    document.getElementById('studentMajor').innerText = profile.major;
+    document.getElementById('aboutMePara').innerText = profile.aboutMe;
 }
+
+getUserData()
