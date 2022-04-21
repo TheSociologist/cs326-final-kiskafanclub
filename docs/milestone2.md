@@ -56,17 +56,17 @@ Allows you to search for colleges based on certain criteria including state or p
 
 ## Posts
 
-{Post being edited image}
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%208.52.19%20PM.png)
 
+
+Users can view, create, edit, and delete posts. 
+
+
+![image](https://github.com/TheSociologist/cs326-final-kiskafanclub/blob/main/docs/Screen%20Shot%202022-04-20%20at%208.52.59%20PM.png)
 Users can view, create, edit, and delete posts. They can also view, create, and delete comments by clicking on the corresponding button. 
 
-## Profile
+They can also view, create, and delete comments by clicking on the corresponding button. 
 
-{Profile page}
-
-{Profile editing menu}
-
-Users can view, create (through sign up), update, and delete (through account deletion) their profiles for external display. 
 
 
 ## URL: 
