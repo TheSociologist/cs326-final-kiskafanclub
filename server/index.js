@@ -98,10 +98,8 @@ app.delete('/post/comments/delete', async (req, res) => {
 });
 
 app.get('/feed', async (req, res) => {
-  console.log('over here')
   try {
     const posts = await getFeed()
-    console.log(posts)
     res.send(JSON.stringify(posts));
   } catch (err) {
     res.status(500).send(err);
