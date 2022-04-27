@@ -4,6 +4,7 @@ import { createPost, updatePost, likePost, deletePost, deleteComment, updateProf
 
 const app = express();
 const port = process.env.PORT || 3000;
+let db = undefined;
 
 // Add Middleware
 app.use(express.json());
@@ -256,14 +257,14 @@ app.listen(port, () => {
 });
 
 async function initDb() {
-  this.db = new PeopleDatabase(this.dburl);
-  await this.db.connect();
+  db = new PeopleDatabase(process.env.DATABASE_URL);
+  await db.connect();
 }
 
 async function start() {
   await initDb();
   const port = process.env.PORT || 3000;
-  this.app.listen(port, () => {
+  app.listen(port, () => {
     console.log(`PeopleServer listening on port ${port}!`);
   });
 }
