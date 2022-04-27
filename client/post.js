@@ -157,7 +157,6 @@ class Post {
         }
         
         if (this.showComments) {
-            console.log('rendering')
             const commentSection = document.createElement('div')
             commentSection.innerHTML = `
                 <div class="form-floating mb-3">
