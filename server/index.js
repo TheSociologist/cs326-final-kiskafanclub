@@ -1,6 +1,6 @@
 import express from 'express';
 import logger from 'morgan'
-import { createPost, updatePost, likePost, deletePost, deleteComment, updateProfile, getFeed, createAccount, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, verifyCreds } from './database.js';
+import { createPost, updatePost, likePost, deletePost, deleteComment, updateProfile, getFeed, createAccount, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, verifyCreds, createProfile, readProfile, updateProfile, deleteProfile, createPost, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -175,7 +175,7 @@ app.delete('/ongoing-meetings/delete', async (req, res) => {
 app.post('/profile/create', async (req, res) => {
   try {
     const { name, password, email } = req.body;
-    await createAccount(name, email, password)
+    await createProfile(name, email, password)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -208,7 +208,6 @@ app.put('/profile/update', async (req, res) => {
 app.delete('/profile/delete', async (req, res) => {
   try {
     const { id } = req.query;
-
     await deleteAccount(id)
     res.send(JSON.stringify({value: 'success'}));
   } catch (err) {
@@ -254,8 +253,7 @@ app.listen(port, () => {
 });
 
 async function initDb() {
-  db = new PeopleDatabase(process.env.DATABASE_URL);
-  await db.connect();
+  await connect();
 }
 
 async function start() {
