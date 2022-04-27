@@ -1,5 +1,112 @@
-// db config stuff here later...
 import { faker } from '@faker-js/faker';
+import PG from 'pg'
+
+const Pool = PG.Pool
+
+const connectionString = process.env.DATABASE_URL
+const client = new Pool({
+    connectionString,
+    ssl: { rejectUnauthorized: false }
+})
+
+// set up db tables
+client.query(
+    `
+    create table if not exists profiles (
+        id varchar(30) primary key,
+        name varchar(30),
+        university varchar(30),
+        major varchar(30),
+        description varchar(200)
+      );
+
+    create table if not exists posts (
+        id varchar(30) primary key,
+        poster varchar(30),
+        content varchar(200),
+        likes int
+    );
+    `
+    , 
+    (err) => {
+        err && console.log(err)
+    }
+)
+
+// CREATE a user in the database.
+export async function createProfile(id, name, university, description) {
+  const queryText = 'INSERT INTO profiles (id, name, university, description) VALUES ($1, $2, $3, $4) RETURNING *';
+  const res = await client.query(queryText, [id, name, university, description]);
+  return res.rows;
+}
+
+// READ a user from the database.
+export async function readProfile(id) {
+  const queryText = 'SELECT * FROM profiles WHERE id = $1';
+  const res = await client.query(queryText, [id]);
+  return res.rows;
+}
+
+// UPDATE a user in the database.
+export async function updateProfile(id, name, university, description) {
+  const queryText = 'UPDATE profile SET name = $2, university = $3, description = $4 WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [id, name, university, description]);
+  return res.rows;
+}
+
+// DELETE a user from the database.
+export async function deleteProfile(id) {
+  const queryText = 'DELETE FROM profiles WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [id]);
+  return res.rows;
+}
+
+export async function createPost(poster, content) {
+  const queryText = 'INSERT INTO posts (poster, content, likes) VALUES ($1, $2, $3) RETURNING *';
+  const res = await client.query(queryText, [poster, content, 0]);
+  return res.rows;
+}
+
+// READ a user from the database.
+export async function readPost(id) {
+  const queryText = 'SELECT * FROM posts WHERE id = $1';
+  const res = await client.query(queryText, [id]);
+  return res.rows;
+}
+
+// UPDATE a user in the database.
+export async function updatePost(id, poster, content) {
+  const queryText = 'UPDATE posts SET poster = $2, content = $3 WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [id, poster, content]);
+  return res.rows;
+}
+
+export async function likePost(id) {
+  const queryText = 'UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [id]);
+  return res.rows;
+}
+
+// DELETE a user from the database.
+export async function deletePost(id) {
+  const queryText = 'DELETE FROM posts WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [id]);
+  return res.rows;
+}
+
+// READ all people from the database.
+export async function readAllProfiles() {
+  const queryText = 'SELECT * FROM profiles';
+  const res = await client.query(queryText);
+  return res.rows;
+}
+
+export async function readAllPosts() {
+  const queryText = 'SELECT * FROM posts';
+  const res = await client.query(queryText);
+  return res.rows;
+}
+
 
 export const searchSchools = async () => {
   const schools = [];
@@ -16,10 +123,6 @@ export const searchSchools = async () => {
   return schools;
 };
 
-export const createPost = async post => {
-  return post;
-};
-
 export const getPostById = async id => {
   return {
     id,
@@ -30,12 +133,6 @@ export const getPostById = async id => {
     createdAt: faker.date.recent()
   };
 };
-
-export const updatePost = async id => {};
-
-export const likePost = async (id, userId) => {};
-
-export const deletePost = async (id, userId) => {};
 
 export const getComments = async id => {
   const comments = [];
@@ -140,8 +237,6 @@ export const getCollegePosts = async id => {
 
 export const deleteAccount = async id => {};
 
-export const updateProfile = async profile => {};
-
 export const getProfile = async id => {
   return {
     id: faker.datatype.number(),
@@ -153,127 +248,3 @@ export const getProfile = async id => {
     resume: faker.image.technics()
   };
 };
-
-let pool, client;
-const dburl = process.env.DATABASE_URL;
-
-export async function connect() {
-  // Create a new Pool. The Pool manages a set of connections to the database.
-  // It will keep track of unused connections, and reuse them when new queries
-  // are needed. The constructor requires a database URL to make the
-  // connection. You can find the URL of your database by looking in Heroku
-  // or you can run the following command in your terminal:
-  //
-  //  heroku pg:credentials:url -a APP_NAME
-  //
-  // Replace APP_NAME with the name of your app in Heroku.
-  pool = new Pool({
-    connectionString: dburl,
-    ssl: { rejectUnauthorized: false } // Required for Heroku connections
-  });
-
-  // Create the pool.
-  client = await pool.connect();
-
-  // Init the database.
-  await init();
-}
-
-async function init() {
-  const queryText = `
-      create table if not exists profiles (
-        id varchar(30) primary key,
-        name varchar(30),
-        university varchar(30),
-        major varchar(30),
-        description varchar(200)
-      );
-
-      create table if not exists posts (
-        id varchar(30) primary key,
-        poster varchar(30),
-        content varchar(200),
-        likes int
-      );`;
-  const res = await client.query(queryText);
-}
-
-// Close the pool.
-export async function close() {
-  client.release();
-  await pool.end();
-}
-
-// CREATE a user in the database.
-export async function createProfile(id, name, university, description) {
-  const queryText = 'INSERT INTO profiles (id, name, university, description) VALUES ($1, $2, $3, $4) RETURNING *';
-  const res = await client.query(queryText, [id, name, university, description]);
-  return res.rows;
-}
-
-// READ a user from the database.
-export async function readProfile(id) {
-  const queryText = 'SELECT * FROM profiles WHERE id = $1';
-  const res = await client.query(queryText, [id]);
-  return res.rows;
-}
-
-// UPDATE a user in the database.
-export async function updateProfile(id, name, university, description) {
-  const queryText = 'UPDATE profile SET name = $2, university = $3, description = $4 WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id, name, university, description]);
-  return res.rows;
-}
-
-// DELETE a user from the database.
-export async function deleteProfile(id) {
-  const queryText = 'DELETE FROM profiles WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id]);
-  return res.rows;
-}
-
-export async function createPost(poster, content) {
-  const queryText = 'INSERT INTO posts (poster, content, likes) VALUES ($1, $2, $3) RETURNING *';
-  const res = await client.query(queryText, [poster, content, 0]);
-  return res.rows;
-}
-
-// READ a user from the database.
-export async function readPost(id) {
-  const queryText = 'SELECT * FROM posts WHERE id = $1';
-  const res = await client.query(queryText, [id]);
-  return res.rows;
-}
-
-// UPDATE a user in the database.
-async function updatePost(id, poster, content) {
-  const queryText = 'UPDATE posts SET poster = $2, content = $3 WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id, poster, content]);
-  return res.rows;
-}
-
-export async function likePost(id) {
-  const queryText = 'UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id]);
-  return res.rows;
-}
-
-// DELETE a user from the database.
-export async function deletePost(id) {
-  const queryText = 'DELETE FROM posts WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id]);
-  return res.rows;
-}
-
-// READ all people from the database.
-export async function readAllProfiles() {
-  const queryText = 'SELECT * FROM profiles';
-  const res = await client.query(queryText);
-  return res.rows;
-}
-
-export async function readAllPosts() {
-  const queryText = 'SELECT * FROM posts';
-  const res = await client.query(queryText);
-  return res.rows;
-}

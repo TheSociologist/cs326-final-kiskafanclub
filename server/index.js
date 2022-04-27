@@ -1,10 +1,10 @@
+import 'dotenv/config'
 import express from 'express';
 import logger from 'morgan'
-import { createPost, updatePost, likePost, deletePost, deleteComment, updateProfile, getFeed, createAccount, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, verifyCreds, createProfile, readProfile, updateProfile, deleteProfile, createPost, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
+import { createPost, deleteComment, getFeed, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, verifyCreds, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
-let db = undefined;
 
 // Add Middleware
 app.use(express.json());
@@ -251,17 +251,3 @@ app.all('*', async (request, response) => {
 app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
-
-async function initDb() {
-  await connect();
-}
-
-async function start() {
-  await initDb();
-  const port = process.env.PORT || 3000;
-  app.listen(port, () => {
-    console.log(`PeopleServer listening on port ${port}!`);
-  });
-}
-
-start();
