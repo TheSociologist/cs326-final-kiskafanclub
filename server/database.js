@@ -255,10 +255,10 @@ async function connect() {
     return res.rows;
   }
 
-  async function createPost(id, poster, content) {
+  async function createPost(poster, content) {
     const queryText =
-      'INSERT INTO posts (id, poster, content, likes) VALUES ($1, $2, $3, $4, $5) RETURNING *';
-    const res = await client.query(queryText, [id, poster, content, 0]);
+      'INSERT INTO posts (poster, content, likes) VALUES ($1, $2, $3) RETURNING *';
+    const res = await client.query(queryText, [poster, content, 0]);
     return res.rows;
   }
 
