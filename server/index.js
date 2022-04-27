@@ -254,3 +254,18 @@ app.all('*', async (request, response) => {
 app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
+
+async function initDb() {
+  this.db = new PeopleDatabase(this.dburl);
+  await this.db.connect();
+}
+
+async function start() {
+  await initDb();
+  const port = process.env.PORT || 3000;
+  this.app.listen(port, () => {
+    console.log(`PeopleServer listening on port ${port}!`);
+  });
+}
+
+start();

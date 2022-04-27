@@ -176,6 +176,7 @@ export const createAccount = (name, email, password) => {
 }
 
 let pool, client;
+const dburl = process.env.DATABASE_URL;
 
 async function connect() {
     // Create a new Pool. The Pool manages a set of connections to the database.
