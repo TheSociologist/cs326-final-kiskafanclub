@@ -189,12 +189,12 @@ async function connect() {
     //
     // Replace APP_NAME with the name of your app in Heroku.
     pool = new Pool({
-      connectionString: this.dburl,
+      connectionString: dburl,
       ssl: { rejectUnauthorized: false }, // Required for Heroku connections
     });
 
     // Create the pool.
-    client = await this.pool.connect();
+    client = await pool.connect();
 
     // Init the database.
     await init();

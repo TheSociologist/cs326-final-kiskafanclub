@@ -221,7 +221,6 @@ app.get('/college', async (req, res) => {
   res.send(JSON.stringify(college));
 })
 
-
 app.get('/college/posts', async (req, res) => {
   try {
     const posts = await getCollegePosts(req.query.id)
@@ -230,8 +229,6 @@ app.get('/college/posts', async (req, res) => {
     res.status(500).send(err);
   }
 });
-
-
 
 app.post('/sign-in', async(req, res)=>{
   try{
