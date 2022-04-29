@@ -9,89 +9,126 @@ const client = new Pool({
     ssl: { rejectUnauthorized: false }
 })
 
-// set up db tables
+// set up db tables, remove -- in first line if you need to drop all tables (BE CAREFUL!!!)
 client.query(
-    `
+  `
+    -- drop table if exists comments, schools, profiles, posts, meetings; 
+    CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      NEW.updated_at = NOW();
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+
     create table if not exists profiles (
-        id varchar(30) primary key,
-        name varchar(30),
-        university varchar(30),
-        major varchar(30),
-        description varchar(200)
-      );
+      id serial primary key,
+      name text,
+      university text,
+      major text,
+      description text
+    );
+
+    create table if not exists schools (
+      id serial primary key,
+      name text,
+      description text,
+      num_students int,
+      address text
+    );
 
     create table if not exists posts (
-        id varchar(30) primary key,
-        poster varchar(30),
-        content varchar(200),
-        likes int
+      id serial primary key,
+      school_id int references schools,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      created_by int references profiles,
+      content text,
+      likes int
     );
-    `
-    , 
-    (err) => {
-        err && console.log(err)
-    }
+    
+    create table if not exists comments (
+      id serial primary key,
+      post_id int references posts,
+      created_by int references profiles,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      content text,
+      likes int
+    );
+
+    create table if not exists meetings (
+      id serial primary key,
+      title text,
+      created_by int references profiles,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      start_date TIMESTAMPTZ,
+      end_date TIMESTAMPTZ
+    );
+  `
+  , 
+  (err) => {
+      err && console.log(err)
+  }
 )
 
 // CREATE a user in the database.
 export async function createProfile(id, name, university, description) {
   const queryText = 'INSERT INTO profiles (id, name, university, description) VALUES ($1, $2, $3, $4) RETURNING *';
   const res = await client.query(queryText, [id, name, university, description]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // READ a user from the database.
 export async function readProfile(id) {
   const queryText = 'SELECT * FROM profiles WHERE id = $1';
   const res = await client.query(queryText, [id]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // UPDATE a user in the database.
 export async function updateProfile(id, name, university, description) {
   const queryText = 'UPDATE profile SET name = $2, university = $3, description = $4 WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [id, name, university, description]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // DELETE a user from the database.
 export async function deleteProfile(id) {
   const queryText = 'DELETE FROM profiles WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [id]);
-  return res.rows;
+  return res.rows[0];
 }
 
 export async function createPost(poster, content) {
   const queryText = 'INSERT INTO posts (poster, content, likes) VALUES ($1, $2, $3) RETURNING *';
   const res = await client.query(queryText, [poster, content, 0]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // READ a user from the database.
 export async function readPost(id) {
   const queryText = 'SELECT * FROM posts WHERE id = $1';
   const res = await client.query(queryText, [id]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // UPDATE a user in the database.
 export async function updatePost(id, poster, content) {
   const queryText = 'UPDATE posts SET poster = $2, content = $3 WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [id, poster, content]);
-  return res.rows;
+  return res.rows[0];
 }
 
 export async function likePost(id) {
   const queryText = 'UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [id]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // DELETE a user from the database.
 export async function deletePost(id) {
   const queryText = 'DELETE FROM posts WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [id]);
-  return res.rows;
+  return res.rows[0];
 }
 
 // READ all people from the database.
