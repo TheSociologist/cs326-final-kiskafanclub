@@ -1,16 +1,35 @@
 import 'dotenv/config'
 import express from 'express';
 import logger from 'morgan'
-import { createPost, deleteComment, getFeed, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, verifyCreds, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
+import { createPost, deleteComment, getFeed, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
+import auth from './auth.js';
+import expressSession from 'express-session';
 
 const app = express();
 const port = process.env.PORT || 3000;
+const secret = process.env.SECRET || 'SECRET';
+
+const sessionConfig = {
+  secret,
+  resave: false,
+  saveUninitialized: false,
+};
 
 // Add Middleware
+app.use(expressSession(sessionConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(logger('combined'));
 app.use(express.static('client'));
+auth.configure(app);
+
+function checkLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 app.get('/search', async (req, res) => {
   const { query } = req.query
@@ -18,7 +37,7 @@ app.get('/search', async (req, res) => {
   res.send(JSON.stringify(schools));
 })
 
-app.post('/post/create', async (req, res) => {
+app.post('/post/create', checkLoggedIn, async (req, res) => {
   try {
     const post = await createPost(req.body)
     res.send(JSON.stringify(post));
@@ -38,7 +57,7 @@ app.get('/post/read', async (req, res) => {
   }
 });
 
-app.patch('/post/update', async (req, res) => {
+app.patch('/post/update', checkLoggedIn, async (req, res) => {
   try {
     await updatePost(req.body)
     res.send(JSON.stringify({status: 'successful'}));
@@ -47,7 +66,7 @@ app.patch('/post/update', async (req, res) => {
   }
 });
 
-app.put('/post/like', async (req, res) => {
+app.put('/post/like', checkLoggedIn, async (req, res) => {
   try {
     const { id } = req.query;
     const userId = 2;
@@ -58,7 +77,7 @@ app.put('/post/like', async (req, res) => {
   }
 });
 
-app.delete('/post/delete', async (req, res) => {
+app.delete('/post/delete', checkLoggedIn, async (req, res) => {
   try {
     const { id } = req.query;
     await deletePost(id);
@@ -78,7 +97,7 @@ app.get('/post/comments', async (req, res) => {
   }
 });
 
-app.post('/post/comments/create', async (req, res) => {
+app.post('/post/comments/create', checkLoggedIn, async (req, res) => {
   try {
     const comment = await createComment(req.body)
     res.send(comment);
@@ -87,7 +106,7 @@ app.post('/post/comments/create', async (req, res) => {
   }
 });
 
-app.delete('/post/comments/delete', async (req, res) => {
+app.delete('/post/comments/delete', checkLoggedIn, async (req, res) => {
   try {
     const {commentId} = req.query;
     await deleteComment(commentId)
@@ -97,7 +116,7 @@ app.delete('/post/comments/delete', async (req, res) => {
   }
 });
 
-app.get('/feed', async (req, res) => {
+app.get('/feed', checkLoggedIn, async (req, res) => {
   try {
     const posts = await getFeed()
     res.send(JSON.stringify(posts));
@@ -170,15 +189,6 @@ app.delete('/ongoing-meetings/delete', async (req, res) => {
   }
 });
 
-app.post('/profile/create', async (req, res) => {
-  try {
-    const { name, password, email } = req.body;
-    await createProfile(name, email, password)
-    res.send(JSON.stringify({value: 'success'}));
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
 
 //make fetch to this route and get object with all profile info fields
 //document.getelementbyid each element from the server
@@ -227,19 +237,28 @@ app.get('/college/posts', async (req, res) => {
   }
 });
 
-app.post('/sign-in', async(req, res)=>{
-  try{
-    const {password, email} = req.body;
-    const result = await verifyCreds(email, password);
-    if (result) {
-      res.send(JSON.stringify({value: 'success'}));
+app.post('/profile/create', async (req, res) => {
+  try {
+    const { name, password, email } = req.body;
+    if (await createProfile(name, email, password)) {
+      res.redirect('/dashboard.html');
     } else {
-      res.status(403).send(JSON.stringify({value: 'failure'}));
+      res.redirect('/sign-up.html');
     }
-    
-    } catch(err){
-      res.status(500).send(err);
-    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/sign-in', auth.authenticate('local', {
+  // use username/password authentication
+  successRedirect: '/dashboard.html', // when we login, go to /private
+  failureRedirect: '/sign-in.html', // otherwise, back to login
+}));
+
+app.post('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/sign-in.html');
 });
 
 app.all('*', async (request, response) => {

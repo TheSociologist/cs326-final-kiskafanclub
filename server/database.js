@@ -26,7 +26,9 @@ client.query(
       name text,
       university text,
       major text,
-      description text
+      description text,
+      email text,
+      password text
     );
 
     create table if not exists schools (
@@ -65,9 +67,7 @@ client.query(
     );
   `
   , 
-  (err) => {
-      err && console.log(err)
-  }
+  (err) => err ?  console.log(err) : console.log('DB initialized')
 )
 
 // CREATE a user in the database.
@@ -264,10 +264,6 @@ export const deleteMeeting = async id => {};
 
 export const updateMeeting = async meeting => {};
 
-export const verifyCreds = async (email, password) => {
-  return true;
-};
-
 export const getCollegePosts = async id => {
   return getFeed();
 };
@@ -285,3 +281,9 @@ export const getProfile = async id => {
     resume: faker.image.technics()
   };
 };
+
+export const getProfileByEmail = async email => {
+  const queryText = 'select * from profiles where email = $1';
+  const res = await client.query(queryText, [email]);
+  return res.rows[0];
+}
