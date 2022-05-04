@@ -1,9 +1,9 @@
 function includeHTML() {
     document.body.innerHTML = `
         <html lang="en">
-            <body>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
+            <body >
+                <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#658B6F;">
+                    <div class="container-fluid" style="background-color:#C4CDC1;">
                         <a class="navbar-brand" href="/index.html">
                             <img
                                 id="main-icon"
@@ -18,26 +18,26 @@ function includeHTML() {
                             
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-buttons">
                                 <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/index.html">Home</a>
+                                <a class="nav-link" aria-current="page" href="/index.html" style="color:#2f575d">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/colleges.html">Colleges</a>
+                                <a class="nav-link" href="/colleges.html" style="color:#2f575d">Colleges</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/ongoing-meetings.html">Meetings</a>
+                                <a class="nav-link" href="/ongoing-meetings.html" style="color:#2f575d">Meetings</a>
                                 </li>
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown" style="color:#2f575d">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Me
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="color:#2f575d">
                                     <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
                                     <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
                                 </ul>
                                 </li>
                             </ul>
                             <form class="d-flex" id="search-form">
-                                <input id="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <input id="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="color:#2f575d">
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
