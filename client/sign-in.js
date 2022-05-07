@@ -1,20 +1,22 @@
+const errorText = document.getElementById('error')
+const urlSearchParams = new URLSearchParams(window.location.search);
+const {error} = Object.fromEntries(urlSearchParams.entries());
 
-
-document.getElementById('signIn').addEventListener('click',async () => {
-	const response = await fetch('/sign-in', {
-		method: 'POST',
-		body:JSON.stringify( {
-			email: document.getElementById('email').value,
-			password: document.getElementById('password').value
-		}),
-		headers: {
-		  'Accept': 'application/json',
-		  'Content-Type': 'application/json'
-		},
-	})
-	const result = await response.json()
-	if(result.value === 'success'){
-		document.location.href = '/dashboard.html'
+async function checkSignedIn() {
+	const response = await fetch('/signed-in')
+	const { signedIn } = await response.json()
+	console.log(signedIn)
+	if (signedIn) {
+		window.location.href = '/dashboard.html'
 	}
-});
+}
 
+checkSignedIn()
+
+if (error) {
+	errorText.classList.remove("error-text")
+	errorText.classList.add("error-text-visible")
+} else {
+	errorText.classList.add("error-text")
+	errorText.classList.remove("error-text-visible")
+}

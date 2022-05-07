@@ -1,10 +1,15 @@
-function includeHTML() {
+async function includeHTML() {
+    const response = await fetch('/signed-in')
+	const { signedIn } = await response.json()
+	console.log(signedIn)
+    const homePage = signedIn ? '/dashboard.html' : '/index.html'
+
     document.body.innerHTML = `
         <html lang="en">
-            <body >
-                <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#658B6F;">
-                    <div class="container-fluid" style="background-color:#C4CDC1;">
-                        <a class="navbar-brand" href="/index.html">
+            <body>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="${homePage}">
                             <img
                                 id="main-icon"
                                 src="https://www.freeiconspng.com/thumbs/graduation-cap/high-resolution-graduation-cap-png-icon-17.png"
@@ -18,7 +23,14 @@ function includeHTML() {
                             
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-buttons">
                                 <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/index.html" style="color:#2f575d">Home</a>
+                                ${
+                                    signedIn ? 
+                                    `
+                                        <a class="nav-link" aria-current="page" href="${homePage}">Home</a>
+                                    `
+                                    :
+                                    ''
+                                }
                                 </li>
                                 <li class="nav-item">
                                 <a class="nav-link" href="/colleges.html" style="color:#2f575d">Colleges</a>
@@ -26,13 +38,22 @@ function includeHTML() {
                                 <li class="nav-item">
                                 <a class="nav-link" href="/ongoing-meetings.html" style="color:#2f575d">Meetings</a>
                                 </li>
-                                <li class="nav-item dropdown" style="color:#2f575d">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Me
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="color:#2f575d">
+                                <li class="nav-item dropdown">
+                                ${
+                                    signedIn ? 
+                                    `
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Profile
+                                        </a>
+                                    `
+                                    :
+                                    ''
+                                }
+                               
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
                                     <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                                    <li><a class="dropdown-item" id="sign-out-btn">Sign Out</a></li>
                                 </ul>
                                 </li>
                             </ul>
@@ -47,13 +68,21 @@ function includeHTML() {
         </html>
 
     ` + document.body.innerHTML
+
+
+    document.getElementById('sign-out-btn')?.addEventListener('click', async () => {
+        console.log('sign out')
+        await fetch('/logout', {method: 'POST'})
+        window.location.href = '/sign-in.html'
+    })
+
+    const form = document.getElementById('search-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const query = document.getElementById('query').value
+        document.location.href = '/search.html?' + new URLSearchParams({query});
+    })
 }
 
 includeHTML()
 
-const form = document.getElementById('search-form')
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const query = document.getElementById('query').value
-    document.location.href = '/search.html?' + new URLSearchParams({query});
-})

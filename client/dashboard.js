@@ -1,4 +1,16 @@
 import { renderPostList } from './post.js'
+
+async function checkSignedIn() {
+	const response = await fetch('/signed-in')
+	const { signedIn } = await response.json()
+	console.log(signedIn)
+	if (!signedIn) {
+		window.location.href = '/sign-in.html'
+	}
+}
+
+checkSignedIn()
+
 const renderFeed = async () => {
     const response = await fetch('/feed')
     const posts = await response.json()
