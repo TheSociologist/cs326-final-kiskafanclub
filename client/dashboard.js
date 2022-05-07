@@ -3,7 +3,6 @@ import { renderPostList } from './post.js'
 async function checkSignedIn() {
 	const response = await fetch('/signed-in')
 	const { signedIn } = await response.json()
-	console.log(signedIn)
 	if (!signedIn) {
 		window.location.href = '/sign-in.html'
 	}
@@ -15,17 +14,28 @@ const renderFeed = async () => {
     const response = await fetch('/feed')
     const posts = await response.json()
     renderPostList(document.getElementById('feed'), posts)
+
+    if (posts.length > 0) {
+        document.getElementById('empty-message').innerHTML = ''
+    } else {
+        document.getElementById('empty-message').innerHTML = 'No Posts. Favorite some colleges to see more.'
+    }
 }
 
 const renderList = (list, link, items) => {
-    items.forEach(({name, id}) => {
-        const item = document.createElement('a')
-        item.innerText = name
-        item.href = `/${link}.html?id=${id}`
-        const div = document.createElement('div')
-        div.appendChild(item)
-        list.appendChild(div)
-    })
+    if (items.length > 0) {
+        items.forEach(({name, id}) => {
+            const item = document.createElement('a')
+            item.innerText = name
+            item.href = `/${link}.html?id=${id}`
+            const div = document.createElement('div')
+            div.appendChild(item)
+            list.appendChild(div)
+        })
+    } else {
+        list.innerHTML = "None"
+    }
+    
 }
 
 const renderSuggestedSchools = async () => {

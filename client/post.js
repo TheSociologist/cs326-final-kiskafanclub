@@ -62,7 +62,7 @@ class Post {
         const body = document.getElementById(`post-card-comment-${this.id}`).value
         const response = await fetch(`/post/comments/create?` + new URLSearchParams({id: this.id}), {
             method: 'POST',
-            body: JSON.stringify({text: body}),
+            body: JSON.stringify({content: body, post_id: this.id}),
             ...commonHeaders
         })
         const comment = await response.json()

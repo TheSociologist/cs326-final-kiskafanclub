@@ -25,7 +25,7 @@ const strategy = new Strategy(async (username, password, done) => {
   }
   // success!
   // should create a user object here, associated with a unique identifier
-  return done(null, username);
+  return done(null, profile);
 });
 
 // Configure passport to use the LocalStrategy object.

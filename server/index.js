@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express';
 import logger from 'morgan'
-import { createPost, deleteComment, getFeed, createComment, createMeeting, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
+import { createPost, deleteComment, getFeed, createComment, createMeeting, getProfileByEmail, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
 import auth from './auth.js';
 import expressSession from 'express-session';
 
@@ -25,10 +25,8 @@ auth.configure(app);
 
 function checkLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log('authenticated')
     next();
   } else {
-    console.log('not authenticated')
     res.redirect('/sign-in.html');
   }
 }
@@ -120,7 +118,7 @@ app.delete('/post/comments/delete', checkLoggedIn, async (req, res) => {
 
 app.get('/feed', checkLoggedIn, async (req, res) => {
   try {
-    const posts = await getFeed()
+    const posts = await getFeed(req.user.id)
     res.send(JSON.stringify(posts));
   } catch (err) {
     res.status(500).send(err);
@@ -199,7 +197,7 @@ app.delete('/ongoing-meetings/delete', async (req, res) => {
 //create a function that handles variable to field mapping
 app.get('/profile/read', async (req, res) => {
   try {
-    const profile = await getProfile()
+    const profile = await getProfile(req.user.id)
     res.send(JSON.stringify(profile));
   } catch (err) {
     res.status(500).send(err);
@@ -241,17 +239,13 @@ app.get('/college/posts', async (req, res) => {
 
 app.post('/profile/create', async (req, res) => {
   try {
-    console.log(req.body)
     const { name, password, email } = req.body;
     if (await createProfile(name, email, password)) {
-      console.log('going to dashboard')
       res.redirect('/dashboard.html');
     } else {
-      console.log('signing up')
       res.redirect('/sign-up.html?error=true');
     }
   } catch (err) {
-    console.log(err)
     res.redirect('/sign-up.html?error=true');
   }
 });
@@ -264,7 +258,6 @@ app.post(
     failureMessage: true
   }),
   (req, res) => {
-    console.log('over here')
     res.redirect('/dashboard.html');
   }
 );
