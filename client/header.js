@@ -33,10 +33,10 @@ async function includeHTML() {
                                 }
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/colleges.html">Colleges</a>
+                                <a class="nav-link" href="/colleges.html" style="color:#2f575d">Colleges</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/ongoing-meetings.html">Meetings</a>
+                                <a class="nav-link" href="/ongoing-meetings.html" style="color:#2f575d">Meetings</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                 ${
@@ -58,7 +58,7 @@ async function includeHTML() {
                                 </li>
                             </ul>
                             <form class="d-flex" id="search-form">
-                                <input id="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <input id="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="color:#2f575d">
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
@@ -75,13 +75,14 @@ async function includeHTML() {
         await fetch('/logout', {method: 'POST'})
         window.location.href = '/sign-in.html'
     })
+
+    const form = document.getElementById('search-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const query = document.getElementById('query').value
+        document.location.href = '/search.html?' + new URLSearchParams({query});
+    })
 }
 
 includeHTML()
 
-const form = document.getElementById('search-form')
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const query = document.getElementById('query').value
-    document.location.href = '/search.html?' + new URLSearchParams({query});
-})

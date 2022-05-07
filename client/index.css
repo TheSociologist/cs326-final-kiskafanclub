@@ -95,3 +95,18 @@
     border-width: 1px;
     border-color: whitesmoke
 }
+
+#cont {
+    margin-left: auto;
+    margin-right: auto
+}
+
+#in {
+    color: #2F575D;
+    border: 2px solid #2F575D
+}
+
+#up {
+    color: #193C0D;
+    border: 2px solid #193C0D;
+}
