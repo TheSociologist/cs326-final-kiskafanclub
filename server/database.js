@@ -81,7 +81,6 @@ client.query(
 export const getSchools = async () => {
   const queryText = 'select * from schools';
   const res = await client.query(queryText);
-  console.log(res)
   return res.rows;
 };
 
