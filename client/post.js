@@ -98,10 +98,10 @@ class Post {
                     <label for="floatingInput">Title</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="post-card-text-${this.id}" style="height: 100px"></textarea>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="post-card-text-${this.id}" ></textarea>
                     <label for="floatingPassword">Body</label>
                 </div>
-                <div style="margin-top: 15px">
+                <div >
                     <button type="button" class="btn btn-outline-primary" id="post-save-${this.id}">
                         Save
                     </button>

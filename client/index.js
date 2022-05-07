@@ -1,4 +1,5 @@
-document.getElementById('in').addEventListener('click', () =>{
+document.getElementById('in').addEventListener('mouseover', () => {
+    console.log('clicked here')
     document.location.href = '/sign-in.html'
 })
 

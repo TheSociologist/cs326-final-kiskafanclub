@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express';
 import logger from 'morgan'
-import { createPost, deleteComment, getFeed, createComment, createMeeting, getProfileByEmail, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
+import { createPost, deleteComment, getFeed, createComment, createMeeting, toggleFavoriteSchool, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
 import auth from './auth.js';
 import expressSession from 'express-session';
 
@@ -224,7 +224,7 @@ app.delete('/profile/delete', async (req, res) => {
 });
 
 app.get('/college', async (req, res) => {
-  const college = await getSchoolById(req.query.id)
+  const college = await getSchoolById(req.user?.id, req.query.id)
   res.send(JSON.stringify(college));
 })
 
@@ -254,13 +254,18 @@ app.post(
   '/sign-in',
   auth.authenticate('local', {
     // use username/password authentication
-    failureRedirect: '/sign-in.html', // otherwise, back to login
+    failureRedirect: '/sign-in.html?error=true', // otherwise, back to login
     failureMessage: true
   }),
   (req, res) => {
     res.redirect('/dashboard.html');
   }
 );
+
+app.post('/college/favorite', async (req, res) => {
+  await toggleFavoriteSchool(req.user?.id, req.query.id)
+  res.status(200).json({signedIn: !!req.isAuthenticated()})
+})
 
 app.get('/signed-in', (req, res) => {
   res.status(200).json({signedIn: !!req.isAuthenticated()})

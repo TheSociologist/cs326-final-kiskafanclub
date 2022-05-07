@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import PG from 'pg'
-
+import fetch from 'node-fetch'
 const Pool = PG.Pool
 
 const connectionString = process.env.DATABASE_URL
@@ -12,7 +12,7 @@ const client = new Pool({
 // set up db tables, remove -- in first line if you need to drop all tables (BE CAREFUL!!!)
 client.query(
   `
-    -- drop table if exists comments, schools, profiles, posts, meetings; 
+    -- drop table if exists comments, schools, profiles, posts, meetings;
     CREATE OR REPLACE FUNCTION trigger_set_timestamp()
     RETURNS TRIGGER AS $$
     BEGIN
@@ -36,12 +36,14 @@ client.query(
       name text,
       description text,
       num_students int,
-      address text
+      address text,
+      banner text,
+      icon text
     );
 
     create table if not exists favorite_schools (
       profile_id int not null references profiles,
-      school_id int not null references profiles,
+      school_id int not null references schools,
       constraint favorite_uq unique (profile_id, school_id)
     );
 
@@ -73,9 +75,60 @@ client.query(
     );
   `
   , 
-  (err) => err ?  console.log(err) : console.log('DB initialized')
+  async (err) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('DB initialized')
+      client.query(
+        `select count(*) from schools`,
+        (err, res) => {
+          const count = parseInt(res.rows[0]?.count)
+          if (err) {
+            console.log('colleges setup failed', err)
+          } else if (count === 0) {
+            console.log('adding colleges')
+            fetch(
+              'https://parseapi.back4app.com/classes/University?limit=100&include=state&keys=name,state,state.name',
+              {
+                headers: {
+                  'X-Parse-Application-Id': 'Ipq7xXxHYGxtAtrDgCvG0hrzriHKdOsnnapEgcbe', // This is the fake app's application id
+                  'X-Parse-Master-Key': 'HNodr26mkits5ibQx2rIi0GR9pVCwOSEAkqJjgVp', // This is the fake app's readonly master key
+                }
+              }
+            ).then((resp) => resp.json().then(({results}) => {
+              results.forEach(({name, state}) => {
+                const queryText = 'insert into schools (name, address, banner, icon, description) values ($1, $2, $3, $4, $5)';
+                client.query(queryText, [name, state, faker.image.abstract(), faker.image.abstract(), faker.lorem.paragraph()]);
+              })
+            }))
+          } else {
+            console.log('colleges set up')
+          }
+        }
+      )
+    }
+  }
+  
 )
 
+export const toggleFavoriteSchool = async (userId, schoolId) => {
+  console.log(userId, schoolId)
+  if (userId && schoolId) {
+    let queryText = 'select * from favorite_schools where profile_id = $1 and school_id = $2';
+    const params = [parseInt(userId), parseInt(schoolId)]
+    let res = await client.query(queryText, params);
+    const favorite = res.rows[0]
+    console.log(favorite)
+    if (favorite) {
+      queryText = 'delete from favorite_schools where profile_id = $1 and school_id = $2';
+    } else {
+      queryText = 'insert into favorite_schools (profile_id, school_id) values ($1, $2)';
+    }
+    res = await client.query(queryText, params);
+    console.log(res)
+  }
+}
 
 
 export const getSchools = async () => {
@@ -212,7 +265,7 @@ export const getFeed = async id => {
 
 export const getRecommendedSchools = async () => {
   
-  return await getSchools();
+  return (await getSchools()).slice(0, 5);
 };
 
 export const getRecommendedTutors = async () => {
@@ -221,6 +274,7 @@ export const getRecommendedTutors = async () => {
     *
     from
     profiles
+    limit 5
   `;
   const res = await client.query(queryText);
   return res.rows;
@@ -238,9 +292,11 @@ export const getOngoingMeetings = async () => {
   return res.rows;
 };
 
-export const getSchoolById = async id => {
-  const queryText = 'select * from schools where id = $1';
-  const res = await client.query(queryText, [id]);
+export const getSchoolById = async (userId, schoolId) => {
+  console.log(userId, schoolId)
+  const queryText = 'select * from schools left join favorite_schools on favorite_schools.school_id = schools.id and favorite_schools.profile_id = $2 where id = $1';
+  const res = await client.query(queryText, [schoolId, userId]);
+  console.log(res)
   return res.rows[0];
 };
 export const createMeeting = async meeting => {
@@ -257,7 +313,7 @@ export const updateMeeting = async meeting => {};
 export const getCollegePosts = async id => {
   const queryText = 'select * from posts where school_id = $1';
   const res = await client.query(queryText, [id]);
-  return res;
+  return res.rows;
 };
 
 export const deleteAccount = async id => {};

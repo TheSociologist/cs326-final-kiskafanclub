@@ -8,10 +8,10 @@ const getId = () => {
 
 const getTab = () => {
     const params = (new URL(document.location)).searchParams;
-    return params.get('tab')
+    return params.get('tab') ? params.get('tab') : 'questions'
 }
 
-const tabs = ['questions', 'about', 'tutors']
+const tabs = ['questions', 'about']
 const currTab = getTab()
 tabs.forEach(tab => {
     const tabElem = document.getElementById(`${tab}-tab`)
@@ -19,47 +19,45 @@ tabs.forEach(tab => {
     currTab === tab ? tabElem.classList.add('active') : tabElem.classList.remove('active')
 })
 
+let college
+
 const displayCollege = async () => {
     const id = getId()
     const response = await fetch('/college?' + new URLSearchParams({id}))
-    let college = await response.json()
+    college = await response.json()
     college = new College(college)
 
     const main = document.getElementById('main-val')
     college.render(main)
 }
 
-const renderQuestions = async (feed) => {
+const renderQuestions = async () => {
     const id = getId()
     const response = await fetch('/college/posts?' + new URLSearchParams({id}))
     const posts = await response.json()
-    renderPostList(feed, posts)
+    console.log(posts)
+    renderPostList(document.getElementById('feed'), posts)
 }
 
-const renderAbout = async (feed) => {
-    
+const renderAbout = async () => {
+    document.getElementById('feed').innerHTML = college.description 
 }
 
-const renderTutors = async (feed) => {
-    
-}
-
-const render = () => {
-    const feed = document.getElementById('feed')
-    feed.innerHTML = ''
+const render = async () => {
+    document.getElementById('feed').innerHTML = ''
+    await displayCollege()
 
     switch(currTab) {
         case 'questions':
-            renderQuestions(feed)
+            renderQuestions()
             break;
         case 'about':
-            renderAbout(feed)
+            renderAbout()
             break;
         case 'tutors':
-            renderTutors(feed)
+            renderTutors()
             break;
     }
 }
 
-displayCollege()
 render()

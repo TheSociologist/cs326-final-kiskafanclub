@@ -110,3 +110,15 @@
     color: #193C0D;
     border: 2px solid #193C0D;
 }
+
+.cover {
+    max-height: 600px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.college-card-banner {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}

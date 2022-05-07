@@ -1,3 +1,5 @@
+import { renderPostList } from './post.js'
+
 export class College {
     name
     id
@@ -11,18 +13,19 @@ export class College {
         this.banner = college.banner
         this.description = college.description 
         this.icon = college.icon
+        this.member = !!college.school_id
     }
 
     render(card) {
         card.id =  `college-card-${this.id}`;
         card.innerHTML = `
-            <div class="card college-card" style="width: 100%;">
+            <div class="card college-card" >
                 <div class="card-images">
                 <img 
                     src="${this.banner}"
-                    class="card-img-top" 
+                    class="card-img-top college-card-banner" 
                     alt="banner"
-                    style="height: 200px;"
+                    
                 >
                 <img
                     src="${this.icon}"
@@ -35,12 +38,27 @@ export class College {
                         <h5 class="card-title">${this.name}</h5>
                     </a>
                     <p class="card-text">
-                        ${this.description}
+                        ${this.description ? this.description : ''}
                     </p>
+                    <button class="btn btn-secondary" id="join-space-${this.id}">
+                        
+                    </button>
                 </div>
             </div>
-        
+
         `;
+
+        const joinButton = document.getElementById(`join-space-${this.id}`)
+        if (this.member) {
+            joinButton.innerHTML = 'Leave'
+        } else {
+            joinButton.innerHTML = 'Join'
+        }
+        joinButton.addEventListener('click', async () => {
+            await fetch(`/college/favorite?id=${this.id}`, {method: 'POST'})
+            this.member = !this.member;
+            this.render(document.getElementById(`college-card-${this.id}`))
+        })
     }
 }
 

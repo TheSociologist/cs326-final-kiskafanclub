@@ -32,10 +32,10 @@ async function includeHTML() {
                                 }
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/colleges.html" style="color:#2f575d">Colleges</a>
+                                <a class="nav-link" href="/colleges.html" >Colleges</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/ongoing-meetings.html" style="color:#2f575d">Meetings</a>
+                                <a class="nav-link" href="/ongoing-meetings.html" >Meetings</a>
                                 </li>
                                 ${
                                     signedIn ? 
@@ -66,7 +66,7 @@ async function includeHTML() {
                                
                             </ul>
                             <form class="d-flex" id="search-form">
-                                <input id="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="color:#2f575d">
+                                <input id="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" >
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
