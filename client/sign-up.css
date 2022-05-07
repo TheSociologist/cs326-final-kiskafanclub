@@ -10,3 +10,13 @@
 	display: flex;
 	justify-content: center;
 }
+
+.error-text-visible {
+	color: red;
+	visibility: visible;
+}
+
+.error-text {
+	color: red;
+	visibility: none;
+}

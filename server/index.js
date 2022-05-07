@@ -16,18 +16,20 @@ const sessionConfig = {
 };
 
 // Add Middleware
-app.use(expressSession(sessionConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(logger('combined'));
+app.use(logger('tiny'));
 app.use(express.static('client'));
+app.use(expressSession(sessionConfig));
 auth.configure(app);
 
 function checkLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log('authenticated')
     next();
   } else {
-    res.redirect('/login');
+    console.log('not authenticated')
+    res.redirect('/sign-in.html');
   }
 }
 
@@ -239,26 +241,42 @@ app.get('/college/posts', async (req, res) => {
 
 app.post('/profile/create', async (req, res) => {
   try {
+    console.log(req.body)
     const { name, password, email } = req.body;
     if (await createProfile(name, email, password)) {
+      console.log('going to dashboard')
       res.redirect('/dashboard.html');
     } else {
-      res.redirect('/sign-up.html');
+      console.log('signing up')
+      res.redirect('/sign-up.html?error=true');
     }
   } catch (err) {
-    res.status(500).send(err);
+    console.log(err)
+    res.redirect('/sign-up.html?error=true');
   }
 });
 
-app.post('/sign-in', auth.authenticate('local', {
-  // use username/password authentication
-  successRedirect: '/dashboard.html', // when we login, go to /private
-  failureRedirect: '/sign-in.html', // otherwise, back to login
-}));
+app.post(
+  '/sign-in',
+  auth.authenticate('local', {
+    // use username/password authentication
+    failureRedirect: '/sign-in.html', // otherwise, back to login
+    failureMessage: true
+  }),
+  (req, res) => {
+    console.log('over here')
+    res.redirect('/dashboard.html');
+  }
+);
+
+app.get('/signed-in', (req, res) => {
+  res.status(200).json({signedIn: !!req.isAuthenticated()})
+})
+
 
 app.post('/logout', (req, res) => {
   req.logout();
-  res.redirect('/sign-in.html');
+  res.status(200).json({message: "logged out"})
 });
 
 app.all('*', async (request, response) => {

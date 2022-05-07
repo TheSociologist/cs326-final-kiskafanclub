@@ -27,7 +27,7 @@ client.query(
       university text,
       major text,
       description text,
-      email text,
+      email text unique not null,
       password text
     );
 
@@ -71,9 +71,10 @@ client.query(
 )
 
 // CREATE a user in the database.
-export async function createProfile(id, name, university, description) {
-  const queryText = 'INSERT INTO profiles (id, name, university, description) VALUES ($1, $2, $3, $4) RETURNING *';
-  const res = await client.query(queryText, [id, name, university, description]);
+export async function createProfile(name, email, password) {
+  console.log(name, email, password)
+  const queryText = 'INSERT INTO profiles (name, email, password) VALUES ($1, $2, $3) RETURNING *';
+  const res = await client.query(queryText, [name, email, password]);
   return res.rows[0];
 }
 

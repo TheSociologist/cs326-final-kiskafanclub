@@ -22,17 +22,18 @@
             <h1>
               Welcome
             </h1>
-            <form>
+            <p class="error-text" id="error">Please try again</p>
+            <form action="/sign-in" method="post">
               <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" name="username">
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
               </div>
               <div class="submit-container">
-                <button id = 'signIn' type="button" class="btn btn-primary">Sign In</button>
+                <button id='signIn' type="submit" class="btn btn-primary">Sign In</button>
               </div>
             </form>
           </div>
