@@ -39,7 +39,7 @@ app.get('/search', async (req, res) => {
 
 app.post('/post/create', checkLoggedIn, async (req, res) => {
   try {
-    const post = await createPost(req.body)
+    const post = await createPost(req.user?.id, req.body)
     res.send(JSON.stringify(post));
   } catch (err) {
     res.status(500).send(err);
@@ -59,7 +59,7 @@ app.get('/post/read', async (req, res) => {
 
 app.patch('/post/update', checkLoggedIn, async (req, res) => {
   try {
-    await updatePost(req.body)
+    await updatePost(req.query.id, req.body)
     res.send(JSON.stringify({status: 'successful'}));
   } catch (err) {
     res.status(500).send(err);
@@ -99,7 +99,7 @@ app.get('/post/comments', async (req, res) => {
 
 app.post('/post/comments/create', checkLoggedIn, async (req, res) => {
   try {
-    const comment = await createComment(req.body)
+    const comment = await createComment(req.user.id, req.body)
     res.send(comment);
   } catch (err) {
     res.status(500).send(err);
@@ -109,6 +109,7 @@ app.post('/post/comments/create', checkLoggedIn, async (req, res) => {
 app.delete('/post/comments/delete', checkLoggedIn, async (req, res) => {
   try {
     const {commentId} = req.query;
+    console.log(commentId)
     await deleteComment(commentId)
     res.send({status: 'success'});
   } catch (err) {

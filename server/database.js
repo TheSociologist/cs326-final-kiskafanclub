@@ -52,6 +52,7 @@ client.query(
       school_id int references schools,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       created_by int references profiles,
+      title text,
       content text,
       likes int
     );
@@ -113,20 +114,17 @@ client.query(
 )
 
 export const toggleFavoriteSchool = async (userId, schoolId) => {
-  console.log(userId, schoolId)
   if (userId && schoolId) {
     let queryText = 'select * from favorite_schools where profile_id = $1 and school_id = $2';
     const params = [parseInt(userId), parseInt(schoolId)]
     let res = await client.query(queryText, params);
     const favorite = res.rows[0]
-    console.log(favorite)
     if (favorite) {
       queryText = 'delete from favorite_schools where profile_id = $1 and school_id = $2';
     } else {
       queryText = 'insert into favorite_schools (profile_id, school_id) values ($1, $2)';
     }
     res = await client.query(queryText, params);
-    console.log(res)
   }
 }
 
@@ -166,10 +164,16 @@ export async function deleteProfile(id) {
   return res.rows[0];
 }
 
-export async function createPost(poster, content) {
-  const queryText = 'INSERT INTO posts (poster, content, likes) VALUES ($1, $2, $3) RETURNING *';
-  const res = await client.query(queryText, [poster, content, 0]);
-  return res.rows[0];
+export async function createPost(userId, post) {
+  console.log(userId, post)
+  if (!userId && !post) {
+    return null;
+  } else {
+    const queryText = 'INSERT INTO posts (created_by, title, content, school_id) VALUES ($1, $2, $3, $4) RETURNING *';
+    const res = await client.query(queryText, [userId, post.title, post.content, post.schoolId]);
+    return res.rows[0];
+  }
+  
 }
 
 // READ a user from the database.
@@ -180,9 +184,9 @@ export async function readPost(id) {
 }
 
 // UPDATE a user in the database.
-export async function updatePost(id, poster, content) {
-  const queryText = 'UPDATE posts SET poster = $2, content = $3 WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id, poster, content]);
+export async function updatePost(id, post) {
+  const queryText = 'UPDATE posts SET title = $2, content = $3 WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [id, post.title, post.content]);
   return res.rows[0];
 }
 
@@ -231,10 +235,14 @@ export const getComments = async id => {
   return res.rows;
 };
 
-export const createComment = async comment => {
-  const queryText = 'insert into comments (post_id, content) values ($1, $2) returning *';
-  const res = await client.query(queryText, [comment.post_id, comment.content]);
-  return res.rows[0];
+export const createComment = async (userId, comment) => {
+  if (userId) {
+    const queryText = 'insert into comments (post_id, content, created_by) values ($1, $2, $3) returning *';
+    const res = await client.query(queryText, [comment.post_id, comment.content, userId]);
+    return res.rows[0];
+  } else {
+    return null
+  }
 };
 
 export const deleteComment = async id => {
@@ -293,10 +301,8 @@ export const getOngoingMeetings = async () => {
 };
 
 export const getSchoolById = async (userId, schoolId) => {
-  console.log(userId, schoolId)
   const queryText = 'select * from schools left join favorite_schools on favorite_schools.school_id = schools.id and favorite_schools.profile_id = $2 where id = $1';
   const res = await client.query(queryText, [schoolId, userId]);
-  console.log(res)
   return res.rows[0];
 };
 export const createMeeting = async meeting => {

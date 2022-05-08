@@ -13,11 +13,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" integrity="sha512-W3ZfgmZ5g1rCPFiCbOb+tn7g7sQWOQCB1AkDqrBG1Yp3iDjY9KYFh/k1AWxrt85LX5BRazEAuv+5DV2YZwghag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<section class="team-section ">
-    <p></p>
+    <section class="team-section">
     <div class="container display-4 fw-bold">
-        <h1 >
-            ONGOING MEETINGS
+        
+        <h1>
+            Ongoing Meetings
         </h1>
         <div class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -28,37 +28,35 @@
                 <button class="dropdown-item" type="button">State</button>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-            Create A New Meeting
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                Create A New Meeting
             </button>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" >
-            <div class="modal-content"  >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Your Meeting</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-dialog" >
+                <div class="modal-content"  >
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Your Meeting</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" >Zoom Title</label>
+                            <input type="text" class="form-control" id="majorInput" placeholder="Title Of Your Meeting">
+                        </div>         
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" >Input Zoom Link</label>
+                            <input type="text" class="form-control" id="majorInput" placeholder="Zoom Link Here">
+                        </div>  
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                    <button type="button" class="btn btn-primary" id = 'saveButton' >Create Meeting</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" >Zoom Title</label>
-                        <input type="text" class="form-control" id="majorInput" placeholder="Title Of Your Meeting">
-                    </div>         
-                    <p></p> 
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" >Input Zoom Link</label>
-                        <input type="text" class="form-control" id="majorInput" placeholder="Zoom Link Here">
-                    </div>  
-                    <p></p> 
-                </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-                  <button type="button" class="btn btn-primary" id = 'saveButton' >Create Meeting</button>
-                </div>
-              </div>
             </div>
-          </div>
           
         <div class="row justify-content-center">
             <div class="col-12 col-md-6">
@@ -96,7 +94,7 @@
                         <div class="card-text">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ0FpBg5Myb9CQ-bQpFou9BY9JXoRG6208_Q&usqp=CAU" alt="Admin"  width="100">
                             <h10 class="card-title  text-right" >John Smith</h10>
-                            <p >
+                            <p>
                                 This meeting is all about the University of Alabama, located in Montgomery, Alamaba...
                             </p>
                         </div>

@@ -91,9 +91,11 @@
 }
 
 .comment-item {
+    margin-top: 5px;
+    margin-bottom: 5px;
     border-bottom: solid;
+    border-color: whitesmoke;
     border-width: 1px;
-    border-color: whitesmoke
 }
 
 #cont {
@@ -121,4 +123,16 @@
     height: 300px;
     width: 100%;
     object-fit: cover;
+}
+
+.post-form {
+    margin-top: 20px;
+}
+
+.comments-section {
+    padding: 15px;
+}
+
+.create-comment {
+    margin-bottom: 10px;
 }
