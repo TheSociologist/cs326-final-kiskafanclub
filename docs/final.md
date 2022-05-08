@@ -154,6 +154,8 @@ posts
 - content text
 - likes int /* number of likes this post has */
  
+Posts are many-to-one with colleges. They are one-to-many with users who create them. 
+
 comments
 - id serial primary key
 - post_id int  /* post this comment belongs to  */
