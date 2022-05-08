@@ -69,7 +69,7 @@ meetings
 # Division of Labor:
 
 Ajan:
-Kays: created wireframes for homepage and search page and created html for each of these pages. 
+Kays: created wireframes for homepage and search page and created html for each of these pages. Created server skeleton that handles endpoint functionality for posts and profiles, and created database functions and queries for most crud operations dealing with porfiles and posts. 
 Sawyer:
 Sugun:
 
