@@ -197,3 +197,10 @@ Sawyer: Created CRUD operations for ongoing meetings and profile sign up, along 
  
 In the beginning of the project, we struggled to find our footing and in finding a solid idea for our project.
 Using bootstrap for the design process immensely helped us visualize what kinds of designs would and wouldn't work.
+
+# Rubric
+- login/register - 30 pts
+- make a post - 20 pts
+- comment on a post - 20 pts
+- create a meeting - 20 pts
+- search for a college - 10 pts
