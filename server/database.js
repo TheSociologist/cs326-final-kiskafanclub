@@ -70,6 +70,8 @@ client.query(
     create table if not exists meetings (
       id serial primary key,
       title text,
+      link text,
+      description text,
       created_by int references profiles,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       start_date TIMESTAMPTZ,
@@ -153,6 +155,7 @@ export async function readProfile(id) {
 
 // UPDATE a user in the database.
 export async function updateProfile(userId, {name, university, description, yog, major}) {
+  console.log(description)
   const queryText = 'UPDATE profiles SET name = $2, university = $3, description = $4, yog = $5, major = $6 WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [userId, name, university ? university : '', description ? description : '', yog ? yog : '', major ? major : '']);
   return res.rows[0];
@@ -307,16 +310,32 @@ export const getSchoolById = async (userId, schoolId) => {
   const res = await client.query(queryText, [schoolId, userId]);
   return res.rows[0];
 };
-export const createMeeting = async meeting => {
-  return {
-    id: faker.datatype.number(),
-    ...meeting
-  };
+export const createMeeting = async (userId, {title, link, startDate, endDate, description}) => {
+  startDate = Date.parse(startDate)
+  endDate = Date.parse(endDate)
+
+  console.log(startDate, endDate)
+  startDate = startDate ? startDate : new Date()
+  endDate = endDate ? endDate : new Date()
+  
+  console.log(startDate, endDate)
+
+  const queryText = 'insert into meetings (title, link, start_date, end_date, created_by, description) values ($1, $2, to_timestamp($3), to_timestamp($4), $5, $6) returning *';
+  const res = await client.query(queryText, [title, link, startDate, endDate, userId, description]);
+  return res.rows[0];
 };
 
-export const deleteMeeting = async id => {};
+export const deleteMeeting = async id => {
+  const queryText = 'delete from meetings where id = $1 returning *';
+  const res = await client.query(queryText, [id]);
+  return res.rows[0];
+};
 
-export const updateMeeting = async meeting => {};
+export const updateMeeting = async ({id, title, startDate, endDate}) => {
+  const queryText = 'update meetings set title = $1, start_date = $2, end_date = $3 where id = $4 returning *';
+  const res = await client.query(queryText, [id, title, startDate, endDate]);
+  return res.rows[0];
+};
 
 export const getCollegePosts = async id => {
   const queryText = 'select * from posts where school_id = $1';

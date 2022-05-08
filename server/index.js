@@ -154,14 +154,15 @@ app.get('/schools', async (req, res) => {
 
 app.post('/ongoing-meetings/create', async (req, res) => {
   try {
-    const meeting = createMeeting(req.body)
-    res.send(JSON.stringify(meeting));
+    const meeting = createMeeting(req.user.id, req.body)
+    res.redirect('/ongoing-meetings.html')
   } catch (err) {
+    console.log(err)
     res.status(500).send(err);
   }
 });
 
-app.get('/ongoing-meetings/read', async (req, res) => {
+app.get('/ongoing-meetings', async (req, res) => {
   try {
     const ongoingMeetings = await getOngoingMeetings()
     res.send(JSON.stringify(ongoingMeetings));
@@ -243,7 +244,7 @@ app.post('/profile/create', async (req, res) => {
   try {
     const { name, password, email } = req.body;
     if (await createProfile(name, email, password)) {
-      res.redirect('/dashboard.html');
+      res.redirect('/sign-in.html');
     } else {
       res.redirect('/sign-up.html?error=true');
     }
