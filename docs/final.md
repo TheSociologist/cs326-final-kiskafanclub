@@ -16,7 +16,14 @@ while also having discussion threads about different aspect of college life.
 - Sawyer: sawjji
 - Sugun: sugun-yadla
 
-# Conclusion 
+# Division of Labor:
+
+Ajan:
+Kays:
+Sawyer:
+Sugun:
+
+# Conclusion:
 
 In the beginning of the project, we struggled to find our footing and in finding a solid idea for our project. 
 Using bootstrap for the design process immensely helped us visualize what kinds of designs would and wouldn't work.
