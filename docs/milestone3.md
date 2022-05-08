@@ -54,4 +54,4 @@ meetings
 - Sugun: Final markdown file, sign up improvements and school queries
 - Sawyer: Finished up meetings, cleaned up code and added more styling
 - Kays: Set up backend database skeleton code and posts/profile queries
-- Ajan: Finished up school, post queries 
+- Ajan: Finished up school, post queries, set up authentication
