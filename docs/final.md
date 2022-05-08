@@ -69,7 +69,7 @@ meetings
 # Division of Labor:
 
 Ajan:
-Kays:
+Kays: created wireframes for homepage and search page and created html for each of these pages. 
 Sawyer:
 Sugun:
 
