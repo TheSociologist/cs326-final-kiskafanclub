@@ -166,7 +166,7 @@ class Post {
             const commentSection = document.createElement('div')
             commentSection.classList.add('comments-section')
             commentSection.innerHTML = `
-                <div class="form-floating mb-3" class="create-comment'>
+                <div class="form-floating mb-3" class="create-comment' style="border: solid">
                     <input class="form-control" id="post-card-comment-${this.id}" placeholder="Comment">
                     <label for="floatingInput">Comment</label>
                 </div>
