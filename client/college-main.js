@@ -35,7 +35,7 @@ const renderQuestions = async () => {
     const id = getId()
     const response = await fetch('/college/posts?' + new URLSearchParams({id}))
     const posts = await response.json()
-    renderPostList(document.getElementById('feed'), posts)
+    renderPostList(document.getElementById('feed'), posts, true)
 }
 
 const renderAbout = async () => {

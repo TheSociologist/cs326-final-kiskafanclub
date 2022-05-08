@@ -32,15 +32,16 @@ class Post {
         this.id = post.id;
         this.title = post.title;
         this.content = post.content;
-        this.numLikes = post.numLikes;
+        this.numLikes = post.likes ? post.likes : 0;
         this.liked = post.liked;
         this.createdAt = post.createdAt;
     }
 
     async toggleVote() {
-        this.numLikes = this.liked ? this.numLikes - 1 : this.numLikes + 1
-        this.liked = !this.liked
+        this.numLikes = this.numLikes + 1
         await fetch('/post/like?' + new URLSearchParams({id: this.id}), {method: 'PUT'})
+        console.log('here')
+        this.render()
     }
 
     toggleEditing() {
@@ -128,9 +129,10 @@ class Post {
                 <p class="card-content">${this.content}</p>
             `
             const upvoteButton = document.createElement('button')
+            console.log(this.numLikes)
             upvoteButton.innerHTML = `
                 👍
-                ${this.liked ? 'Liked' : 'Like'}
+                ${this.numLikes ? this.numLikes : 0}
             `
             upvoteButton.addEventListener('click', () => {
                 this.toggleVote()
@@ -207,8 +209,9 @@ class Post {
 const urlSearchParams = new URLSearchParams(window.location.search);
 const { id } = Object.fromEntries(urlSearchParams.entries());
 
-export const renderPostList = (element, posts) => {
-    element.innerHTML = `
+export const renderPostList = (element, posts, includeCreator) => {
+    if (includeCreator) {
+        element.innerHTML = `
         <div>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#post-creator">
                 Create a new post
@@ -250,6 +253,8 @@ export const renderPostList = (element, posts) => {
         const post = await response.json()
         renderPostList(element, [post, ...posts])
     })
+    }
+    
 
     posts.forEach(p => {
         const div = document.createElement('div')

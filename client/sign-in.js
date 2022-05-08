@@ -2,7 +2,7 @@ const errorText = document.getElementById('error')
 const urlSearchParams = new URLSearchParams(window.location.search);
 const {error} = Object.fromEntries(urlSearchParams.entries());
 
-async function checkSignedIn() {
+export async function checkSignedIn() {
 	const response = await fetch('/signed-in')
 	const { signedIn } = await response.json()
 	if (signedIn) {

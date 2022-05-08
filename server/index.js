@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express';
 import logger from 'morgan'
-import { createPost, deleteComment, getFeed, createComment, createMeeting, toggleFavoriteSchool, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
+import { createPost, deleteComment, getFeed, createComment, searchSchools, createMeeting, toggleFavoriteSchool, deleteAccount, deleteMeeting, getCollegePosts, getComments, getOngoingMeetings, getPostById, getProfile, getRecommendedSchools, getRecommendedTutors, getSchoolById, getSchools, createProfile, readProfile, updateProfile, deleteProfile, readPost, updatePost, likePost, deletePost, readAllProfiles, readAllPosts } from './database.js';
 import auth from './auth.js';
 import expressSession from 'express-session';
 
@@ -33,7 +33,7 @@ function checkLoggedIn(req, res, next) {
 
 app.get('/search', async (req, res) => {
   const { query } = req.query
-  const schools = await searchSchools()
+  const schools = await searchSchools(query)
   res.send(JSON.stringify(schools));
 })
 
@@ -69,8 +69,7 @@ app.patch('/post/update', checkLoggedIn, async (req, res) => {
 app.put('/post/like', checkLoggedIn, async (req, res) => {
   try {
     const { id } = req.query;
-    const userId = 2;
-    await likePost(id, userId)
+    await likePost(id)
     res.send(JSON.stringify({status: 'success'}));
   } catch (err) {
     res.status(500).send(err);
@@ -205,11 +204,13 @@ app.get('/profile/read', async (req, res) => {
   }
 });
 
-app.put('/profile/update', async (req, res) => {
+app.post('/profile/update', async (req, res) => {
+  console.log('over here')
   try {
-    await updateProfile(req.body)
-    res.send(JSON.stringify({value: 'success'}));
+    await updateProfile(req.user.id, req.body)
+    res.redirect('/profile.html')
   } catch (err) {
+    console.log(err)
     res.status(500).send(err);
   }
 });

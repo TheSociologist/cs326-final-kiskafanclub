@@ -28,7 +28,8 @@ client.query(
       major text,
       description text,
       email text unique not null,
-      password text
+      password text,
+      yog text
     );
 
     create table if not exists schools (
@@ -151,9 +152,9 @@ export async function readProfile(id) {
 }
 
 // UPDATE a user in the database.
-export async function updateProfile(id, name, university, description) {
-  const queryText = 'UPDATE profile SET name = $2, university = $3, description = $4 WHERE id = $1 RETURNING *';
-  const res = await client.query(queryText, [id, name, university, description]);
+export async function updateProfile(userId, {name, university, description, yog, major}) {
+  const queryText = 'UPDATE profiles SET name = $2, university = $3, description = $4, yog = $5, major = $6 WHERE id = $1 RETURNING *';
+  const res = await client.query(queryText, [userId, name, university ? university : '', description ? description : '', yog ? yog : '', major ? major : '']);
   return res.rows[0];
 }
 
@@ -191,7 +192,7 @@ export async function updatePost(id, post) {
 }
 
 export async function likePost(id) {
-  const queryText = 'UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *';
+  const queryText = 'UPDATE posts SET likes = coalesce(likes, 0) + 1 WHERE id = $1 RETURNING *';
   const res = await client.query(queryText, [id]);
   return res.rows[0];
 }
@@ -218,8 +219,9 @@ export async function readAllPosts() {
 
 
 export const searchSchools = async (query) => {
-  const queryText = 'SELECT * FROM schools where name ilike $1';
-  const res = await client.query(queryText, [query]);
+  const queryText = `SELECT * FROM schools where name ilike '%${query}%'`;
+  const res = await client.query(queryText);
+  console.log(res.rows  )
   return res.rows;
 };
 

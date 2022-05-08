@@ -1,7 +1,10 @@
-document.getElementById('in').addEventListener('mouseover', () => {
-    document.location.href = '/sign-in.html'
-})
 
-document.getElementById('up').addEventListener('click', () =>{
-    document.location.href = '/sign-up.html'
-})
+async function checkSignedIn() {
+	const response = await fetch('/signed-in')
+	const { signedIn } = await response.json()
+	if (signedIn) {
+		window.location.href = '/dashboard.html'
+	}
+}
+
+checkSignedIn()
